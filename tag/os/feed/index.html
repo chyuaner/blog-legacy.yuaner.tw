@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>作業系統 &#8211; 元兒～ 技術筆記</title>
+	<atom:link href="/tag/os/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Mon, 10 Dec 2018 17:59:56 +0000</lastBuildDate>
+	<language>zh-TW</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/09/pc-programming-icon-150x150.png</url>
+	<title>作業系統 &#8211; 元兒～ 技術筆記</title>
+	<link>/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>把Ubuntu裝在Virtualbox虛擬電腦裡</title>
+		<link>/old/%e6%8a%8aubuntu%e8%a3%9d%e5%9c%a8virtualbox%e8%99%9b%e6%93%ac%e9%9b%bb%e8%85%a6%e8%a3%a1/</link>
+					<comments>/old/%e6%8a%8aubuntu%e8%a3%9d%e5%9c%a8virtualbox%e8%99%9b%e6%93%ac%e9%9b%bb%e8%85%a6%e8%a3%a1/#comments</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Wed, 21 Sep 2011 10:40:00 +0000</pubDate>
+				<category><![CDATA[未整理舊文]]></category>
+		<category><![CDATA[作業系統]]></category>
+		<category><![CDATA[玩Linux的日記]]></category>
+		<category><![CDATA[軟體相關]]></category>
+		<guid isPermaLink="false">http://blog.yuan817.twbbs.org/2011/09/%e6%8a%8aubuntu%e8%a3%9d%e5%9c%a8virtualbox%e8%99%9b%e6%93%ac%e9%9b%bb%e8%85%a6%e8%a3%a1/</guid>
+
+					<description><![CDATA[這篇主要是寫給我們中華資工有修Unix作業系統概論的同學或是想玩Linux Ubuntu又不敢亂裝作業系統的人！！ 我的示範： PS.我的範例是以VirtualBox 4.1.2 + Ubuntu 11.10 Beta1 請到VirtualBox官方下載網頁把軟體下載回來（一般人只要下載VirtualBox platform packages那邊適合自己的平台就行了） 打開剛下載的安裝檔 全選就是&#8230;]]></description>
+										<content:encoded><![CDATA[<p>這篇主要是寫給我們中華資工有修Unix作業系統概論的同學<br />或是想玩Linux Ubuntu又不敢亂裝作業系統的人！！</p>
+<h3>我的示範：</h3>
+<p>PS.我的範例是以VirtualBox 4.1.2 + Ubuntu 11.10 Beta1</p>
+<p>請到<a href="http://www.virtualbox.org/wiki/Downloads" target="_blank">VirtualBox官方下載網頁</a>把軟體下載回來<br />（一般人只要下載VirtualBox platform packages那邊適合自己的平台就行了）<br /><img fetchpriority="high" decoding="async" title="2011-09-18_235654" border="0" alt="2011-09-18_235654" src="http://lh5.ggpht.com/-1vuPtGX2KF8/Tnm-vax-ZzI/AAAAAAAAAdU/5ZCixJHnhe8/2011-09-18_2356548.png?imgmax=800" width="500" height="281"></p>
+<p>打開剛下載的安裝檔<br /><img decoding="async" title="2011-09-18_232740" border="0" alt="2011-09-18_232740" src="http://lh3.ggpht.com/-5EYxWqBirm8/Tnm-v4kucdI/AAAAAAAAAdY/olMyt3WYK48/2011-09-18_2327406.png?imgmax=800" width="404" height="316"></p>
+<p>全選就是啦～<br /><img decoding="async" title="2011-09-18_232809" border="0" alt="2011-09-18_232809" src="http://lh5.ggpht.com/-K3BcJl5escM/Tnm-wboqDhI/AAAAAAAAAdc/VjicRFES-SQ/2011-09-18_2328096.png?imgmax=800" width="504" height="394"></p>
+<p>如果不喜歡這個程式捷徑出現在桌面和下方工具列的話就把勾勾去掉吧<br /><img loading="lazy" decoding="async" title="2011-09-18_232824" border="0" alt="2011-09-18_232824" src="http://lh4.ggpht.com/-cRH3uyhS9T0/Tnm-wtAgXoI/AAAAAAAAAdg/A8mWyLUMkaw/2011-09-18_2328244.png?imgmax=800" width="404" height="316"></p>
+<p>▼接下來按Yes安裝網路卡介面（要安裝！不然無法在虛擬電腦裡上網）<br />PS.對了！安裝網路卡介面時，網路會稍微斷線一下喔！！<br /><img loading="lazy" decoding="async" title="2011-09-18_232832" border="0" alt="2011-09-18_232832" src="http://lh4.ggpht.com/-i-yE27H5DQc/Tnm-xHzC1xI/AAAAAAAAAdk/67JQcqmVKyI/2011-09-18_2328324.png?imgmax=800" width="404" height="316"><img loading="lazy" decoding="async" title="2011-09-18_232852" border="0" alt="2011-09-18_232852" src="http://lh3.ggpht.com/-oSBeMOKSF1w/Tnm-xlyz62I/AAAAAAAAAdo/277iIHYvGQo/2011-09-18_2328524.png?imgmax=800" width="404" height="316"><img loading="lazy" decoding="async" title="2011-09-18_233050" border="0" alt="2011-09-18_233050" src="http://lh5.ggpht.com/-RvlPZv1yPs4/Tnm-x0iI5II/AAAAAAAAAds/6-Sl3Zvs-kw/2011-09-18_2330504.png?imgmax=800" width="404" height="316"></p>
+<p>虛擬電腦這個軟體安裝好了！！<br /><img loading="lazy" decoding="async" title="2011-09-18_233339" border="0" alt="2011-09-18_233339" src="http://lh5.ggpht.com/-s4Hi86wtGT8/Tnm-yc2ysDI/AAAAAAAAAdw/ssqzZfa-Izs/2011-09-18_2333394.png?imgmax=800" width="404" height="316"></p>
+<p>建立虛擬電腦</p>
+<p>▼ 此圖是所有已經建立的虛擬電腦，如果是第一次玩，那應該還沒有虛擬電腦吧，那就&#8230;按下「新增」來建立一台模擬的電腦吧！（我自己老早就已經有四台模擬出來的電腦了XD）<br /><img loading="lazy" decoding="async" title="2011-09-18_234118" border="0" alt="2011-09-18_234118" src="http://lh3.ggpht.com/-6siDep6MYQM/Tnm-y-6-L3I/AAAAAAAAAd0/Gly7mNSfmQ8/2011-09-18_2341185.png?imgmax=800" width="500" height="375"></p>
+<p><img loading="lazy" decoding="async" title="2011-09-18_234129" border="0" alt="2011-09-18_234129" src="http://lh4.ggpht.com/-vkOXa_8bJ0o/Tnm-zKjWnEI/AAAAAAAAAd4/F5FmhtBDh7g/2011-09-18_2341296.png?imgmax=800" width="404" height="261"></p>
+<p>▼在這裡請為這台要建立的電腦取名字吧！（要取測試機也OK）（我自己是習慣取作業系統的名字方便辨認）<br />然後還要選擇你打算要安裝哪個作業系統，這裡就以Ubuntu為例<br /><img loading="lazy" decoding="async" title="2011-09-18_235434" border="0" alt="2011-09-18_235434" src="http://lh6.ggpht.com/-faGH0l10KUE/Tnm-zhuuq6I/AAAAAAAAAd8/XLxNSfpwUg8/2011-09-18_2354348.png?imgmax=800" width="504" height="325"></p>
+<p>▼你要割多少記憶體給虛擬電腦用呢～？<br />Ubuntu最低需求是256MB，我自己是建議512以上吧&#8230;&#8230;<br /><img loading="lazy" decoding="async" title="2011-09-18_234507" border="0" alt="2011-09-18_234507" src="http://lh5.ggpht.com/-VI5MH1_U4RA/Tnm-z-2QinI/AAAAAAAAAeA/WRLw6iUvIMg/2011-09-18_2345075.png?imgmax=800" width="504" height="325"></p>
+<p>▼現在要建立虛擬硬碟<br /><img loading="lazy" decoding="async" title="2011-09-18_234518" border="0" alt="2011-09-18_234518" src="http://lh3.ggpht.com/-OQ5mNyTo5w0/Tnm-0ofvP5I/AAAAAAAAAeE/XTGSDfqTp8Y/2011-09-18_2345185.png?imgmax=800" width="504" height="325"></p>
+<p>▼在這邊我用預設的VDI<br /><img loading="lazy" decoding="async" title="2011-09-18_234950" border="0" alt="2011-09-18_234950" src="http://lh3.ggpht.com/-pB97klqzaBU/Tnm-1DBBx7I/AAAAAAAAAeI/a_GX-0RBJUo/2011-09-18_2349505.png?imgmax=800" width="504" height="329"></p>
+<p>▼我建議用動態配置，這樣一來那個虛擬硬碟檔案大小會根據你時記的使用狀況而占用<br />如果選固定配置的話，假設你新增虛擬硬碟為4GB，那實際硬碟的可用空間就會減少4GB了<br /><img loading="lazy" decoding="async" title="2011-09-18_235004" border="0" alt="2011-09-18_235004" src="http://lh3.ggpht.com/-mpOQoAfG4RQ/Tnm-1gkrsQI/AAAAAAAAAeM/84vh_yBW4H0/2011-09-18_2350045.png?imgmax=800" width="504" height="329"></p>
+<p>▼這裡就是指定虛擬硬碟這個檔案要存在哪個地方，以及指定這顆虛擬硬碟的容量要多少<br />Ubuntu最低需求是4.4GB，建議是8GB以上<br /><img loading="lazy" decoding="async" title="2011-09-18_235513" border="0" alt="2011-09-18_235513" src="http://lh3.ggpht.com/-7UVcjK12RPo/Tnm-14uyDKI/AAAAAAAAAeQ/-fq56lroDhM/2011-09-18_2355135.png?imgmax=800" width="504" height="329"></p>
+<p><img loading="lazy" decoding="async" title="2011-09-18_235545" border="0" alt="2011-09-18_235545" src="http://lh4.ggpht.com/-164uJk4hj-Q/Tnm-2daB50I/AAAAAAAAAeU/YPOBwLG1cvU/2011-09-18_2355455.png?imgmax=800" width="504" height="325"></p>
+<p> </p>
+<p>開機你的虛擬電腦並安裝作業系統Ubuntu</p>
+<p>請到Ubuntu官方網站下載最新版的安裝光碟（如果要安裝在虛擬電腦的話，ISO檔下載好就不需要真的燒入到光碟，因為VirtualBox能直接載入）</p>
+<p>▼現在來把剛剛建好的虛擬電腦開機吧！！<br /><img loading="lazy" decoding="async" title="2011-09-18_235608" border="0" alt="2011-09-18_235608" src="http://lh6.ggpht.com/-dY5veh0QYCY/Tnm-2nM2dJI/AAAAAAAAAeY/25yf_5hwv3Q/2011-09-18_2356085.png?imgmax=800" width="500" height="375"></p>
+<p>▼第一次開機時，會先要求你放入作業系統安裝光碟<br /><img loading="lazy" decoding="async" title="2011-09-18_235851" border="0" alt="2011-09-18_235851" src="http://lh6.ggpht.com/-Rw0eavzs6-Q/Tnm-3P_EiBI/AAAAAAAAAec/kTieP3Nj58Y/2011-09-18_2358514.png?imgmax=800" width="504" height="431"></p>
+<p>▼按下資料夾的按鈕<br /><img loading="lazy" decoding="async" title="2011-09-18_235951" border="0" alt="2011-09-18_235951" src="http://lh6.ggpht.com/-0AMtSzyorTU/Tnm-3n8y0PI/AAAAAAAAAeg/XumVWcIHHdQ/2011-09-18_2359514.png?imgmax=800" width="504" height="431"></p>
+<p>▼選擇剛剛下載的Ubuntu安裝光碟<br /><img loading="lazy" decoding="async" title="2011-09-19_000030" border="0" alt="2011-09-19_000030" src="http://lh4.ggpht.com/-B27zws52TXo/Tnm-4FCiiLI/AAAAAAAAAek/MAkZd9KZz9g/2011-09-19_0000304.png?imgmax=800" width="504" height="379"></p>
+<p><img loading="lazy" decoding="async" title="2011-09-19_000047" border="0" alt="2011-09-19_000047" src="http://lh3.ggpht.com/-2Cdi3oejCfc/Tnm-4pNTwhI/AAAAAAAAAeo/2J1Rm_gApsE/2011-09-19_0000474.png?imgmax=800" width="504" height="431"></p>
+<p>▼接下來虛擬電腦就正式開機了，虛擬電腦畢竟也是電腦，要經過開機程序是必要的，就慢慢等吧！<br /><img loading="lazy" decoding="async" title="2011-09-19_000205" border="0" alt="2011-09-19_000205" src="http://lh6.ggpht.com/--YUDrLme9LU/Tnm-4wlltfI/AAAAAAAAAes/Uj6J1rrgXiU/2011-09-19_0002054.png?imgmax=800" width="404" height="346"></p>
+<p>▼光碟開機後用鍵盤選擇慣用的語言<br /><img loading="lazy" decoding="async" title="2011-09-19_000244" border="0" alt="2011-09-19_000244" src="http://lh5.ggpht.com/-uBZBGQl5x2c/Tnm-5bjOJAI/AAAAAAAAAew/JIOeJ9Pzze8/2011-09-19_0002445.png?imgmax=800" width="500" height="375"></p>
+<p>▼這裡建議先選「試用Ubuntu」<br />（因為等一下在安裝時也可以一邊稍微體驗一下Ubuntu啦～）<br /><img loading="lazy" decoding="async" title="2011-09-19_000257" border="0" alt="2011-09-19_000257" src="http://lh3.ggpht.com/-xvcLWCAGbYU/Tnm-5qWfFgI/AAAAAAAAAe0/2NUe__THdQ0/2011-09-19_0002575.png?imgmax=800" width="500" height="375"></p>
+<p>▼正在開機，從光碟開機要等比較久的時間，耐心囉～<br /><img loading="lazy" decoding="async" title="2011-09-19_000402" border="0" alt="2011-09-19_000402" src="http://lh3.ggpht.com/-Cmu4S8EzeK4/Tnm-6HqFPaI/AAAAAAAAAe4/BjoZAidfimE/2011-09-19_0004025.png?imgmax=800" width="400" height="222"></p>
+<p>▼到了這裡就可以好好的體驗一下Ubuntu，不過在體驗之前可以先執行安裝，然後在安裝時體驗也無妨阿～要安裝的話就請點兩下「安裝Ubuntu」的圖示吧！<br /><img loading="lazy" decoding="async" title="2011-09-19_001109" border="0" alt="2011-09-19_001109" src="http://lh6.ggpht.com/-50ob5av41GI/Tnm-6jK-fJI/AAAAAAAAAe8/39tXU33mteU/2011-09-19_0011095.png?imgmax=800" width="500" height="375"></p>
+<p><img loading="lazy" decoding="async" title="2011-09-19_001126" border="0" alt="2011-09-19_001126" src="http://lh5.ggpht.com/-W6DBWEFy9K0/Tnm-7OZb45I/AAAAAAAAAfA/f8byNihjJts/2011-09-19_0011265.png?imgmax=800" width="500" height="375"></p>
+<p>▼如果想順便更新裡面的套件的話，就勾「當安裝時下載更新」<br />如果想用來聽音樂、看電影的話，那也要勾「安裝此第三方軟體」<br /><img loading="lazy" decoding="async" title="2011-09-19_001158" border="0" alt="2011-09-19_001158" src="http://lh4.ggpht.com/-SAvboP6qrDA/Tnm-7mSs86I/AAAAAAAAAfE/1qdSpL_bR0w/2011-09-19_0011585.png?imgmax=800" width="500" height="375"></p>
+<p>▼這裡就是要選擇要怎麼安裝到硬碟裡，因為這台電腦的虛擬硬碟是剛建立的全新的，所以可以大膽的選擇「Erase disk and install Ubuntu」<br />PS,重要！如果是直接安裝在真實電腦（非虛擬電腦）的話，絕對不能選這個選項！！因為這個選項是清除這顆硬碟全部的資料！！<br /><img loading="lazy" decoding="async" title="2011-09-19_001219" border="0" alt="2011-09-19_001219" src="http://lh5.ggpht.com/-tJ9UM3iajs0/Tnm-8HrLsbI/AAAAAAAAAfI/P67yJlgJuR8/2011-09-19_0012195.png?imgmax=800" width="500" height="375"></p>
+<p>▼再安裝之前做個確認，確定無誤就開始安裝吧！！<br /><img loading="lazy" decoding="async" title="2011-09-19_001322" border="0" alt="2011-09-19_001322" src="http://lh3.ggpht.com/-j4I-ASt_l5U/Tnm-8i2zMfI/AAAAAAAAAfM/9AUhynWsYCg/2011-09-19_0013225.png?imgmax=800" width="500" height="375"></p>
+<p>▼此時Ubuntu已經開始安裝了，而這一步就選擇國別<br /><img loading="lazy" decoding="async" title="2011-09-19_001357" border="0" alt="2011-09-19_001357" src="http://lh5.ggpht.com/-s1affU2qZNM/Tnm-9LI7tGI/AAAAAAAAAfQ/uX-Onvqdsb8/2011-09-19_001357%25255B3%25255D.png?imgmax=800" width="500" height="375"></p>
+<p>▼別懷疑～選English(UK)就對了&#8230;&#8230;（這是指鍵盤排列方式，並非輸入法）<br /><img loading="lazy" decoding="async" title="2011-09-19_001414" border="0" alt="2011-09-19_001414" src="http://lh6.ggpht.com/-71Uswr6HQhc/Tnm-9vBqQXI/AAAAAAAAAfU/Y1EKjG-rL2Y/2011-09-19_001414%25255B3%25255D.png?imgmax=800" width="500" height="375"></p>
+<p>▼這裡就是建立使用者帳戶的地方了&#8230;&#8230;<br /><img loading="lazy" decoding="async" title="2011-09-19_001553" border="0" alt="2011-09-19_001553" src="http://lh3.ggpht.com/-EaqSuIn8OHs/Tnm-93EmvjI/AAAAAAAAAfY/YJd0yO2WBK4/2011-09-19_001553%25255B4%25255D.png?imgmax=800" width="500" height="375"></p>
+<p>▼接下來就請耐心等候了！！<br /><img loading="lazy" decoding="async" title="2011-09-19_001636" border="0" alt="2011-09-19_001636" src="http://lh5.ggpht.com/-Eue6NhEcn1k/Tnm--upl7UI/AAAAAAAAAfc/KYJmtXlAlv8/2011-09-19_001636%25255B3%25255D.png?imgmax=800" width="500" height="375"></p>
+<p>▼安裝完後當然要重新開機囉<br /><img loading="lazy" decoding="async" title="2011-09-19_005151" border="0" alt="2011-09-19_005151" src="http://lh6.ggpht.com/-VmpE3hlF2Ws/Tnm-_AYECKI/AAAAAAAAAfg/rA3FQUZASMg/2011-09-19_005151%25255B3%25255D.png?imgmax=800" width="500" height="375"></p>
+<p>▼再重開機之前，會要求把安裝光碟拿出來，然後按Enter<br />（虛擬電腦裡，已經幫你退片了，只要按Enter即可。若沒退片，就照圖上的方式就行了）<br /><img loading="lazy" decoding="async" title="2011-09-19_010221" border="0" alt="2011-09-19_010221" src="http://lh3.ggpht.com/-reOh_DMEdlM/Tnm-_tKrGOI/AAAAAAAAAfk/PBklnatFkiI/2011-09-19_010221%25255B3%25255D.png?imgmax=800" width="500" height="390"></p>
+<p>▼重開機以後登入你的帳號<br /><img loading="lazy" decoding="async" title="2011-09-19_010545" border="0" alt="2011-09-19_010545" src="http://lh4.ggpht.com/-tJDfmDNPvA8/Tnm_AIEuL-I/AAAAAAAAAfo/XSGX3v65PtQ/2011-09-19_010545%25255B3%25255D.png?imgmax=800" width="400" height="300"></p>
+<p>▼到了這一步，也就表示Ubuntu已經安裝成功了！！！<br /><img loading="lazy" decoding="async" title="2011-09-19_011117" border="0" alt="2011-09-19_011117" src="http://lh5.ggpht.com/-nKVQnRuk6F8/Tnm_BVl-aFI/AAAAAAAAAfs/oSyW7Xo_8uE/2011-09-19_011117%25255B3%25255D.png?imgmax=800" width="500" height="375"></p>
+<p>▼最後建議安裝一下顯示卡的驅動程式，這樣一來才能發揮最好的視覺效果喔&#8230;&#8230;<br /><img loading="lazy" decoding="async" title="2011-09-19_011132" border="0" alt="2011-09-19_011132" src="http://lh3.ggpht.com/-0JWA-fcO2oM/Tnm_B7FWdNI/AAAAAAAAAfw/GcQZ9egm65s/2011-09-19_011132%25255B3%25255D.png?imgmax=800" width="500" height="375"></p>
+<p>這個示範只是給沒玩過Linux的人看的，如果自己很清楚這些設定的作用是什麼的話，可不必完全按照這個做，如果有不清楚的地方也歡迎留言發問喔！！</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/old/%e6%8a%8aubuntu%e8%a3%9d%e5%9c%a8virtualbox%e8%99%9b%e6%93%ac%e9%9b%bb%e8%85%a6%e8%a3%a1/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>俗稱的上帝模式&#8230;&#8230;啟動你的Windows 7無敵控制台</title>
+		<link>/old/%e4%bf%97%e7%a8%b1%e7%9a%84%e4%b8%8a%e5%b8%9d%e6%a8%a1%e5%bc%8f-%e5%95%9f%e5%8b%95%e4%bd%a0%e7%9a%84windows-7%e7%84%a1%e6%95%b5%e6%8e%a7%e5%88%b6%e5%8f%b0/</link>
+					<comments>/old/%e4%bf%97%e7%a8%b1%e7%9a%84%e4%b8%8a%e5%b8%9d%e6%a8%a1%e5%bc%8f-%e5%95%9f%e5%8b%95%e4%bd%a0%e7%9a%84windows-7%e7%84%a1%e6%95%b5%e6%8e%a7%e5%88%b6%e5%8f%b0/#comments</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Fri, 20 Aug 2010 14:18:00 +0000</pubDate>
+				<category><![CDATA[未整理舊文]]></category>
+		<category><![CDATA[作業系統]]></category>
+		<category><![CDATA[軟體相關]]></category>
+		<guid isPermaLink="false">http://blog.yuan817.twbbs.org/2010/08/%e4%bf%97%e7%a8%b1%e7%9a%84%e4%b8%8a%e5%b8%9d%e6%a8%a1%e5%bc%8f-%e5%95%9f%e5%8b%95%e4%bd%a0%e7%9a%84windows-7%e7%84%a1%e6%95%b5%e6%8e%a7%e5%88%b6%e5%8f%b0/</guid>
+
+					<description><![CDATA[其實我一聽到這個詞還覺得蠻好笑的，我還「無敵模式」&#8230;&#8230; 這是我在pcUser的「Windows 7 頂級重灌術」一書學到的密技～大家都知道有Windows有控制台這個東東吧～在Win7裡還隱藏了更厲害的控制台-「上帝模式」（網友俗稱！微軟官方不是這樣叫的）裡面蒐錄了276個設定捷徑喔！警告：這是在Windows 7使用的，拿到其他作業系統使用可能會造成無法正常開機喔！ 使用&#8230;]]></description>
+										<content:encoded><![CDATA[<p>其實我一聽到這個詞還覺得蠻好笑的，我還「無敵模式」&#8230;&#8230;</p>
+<p>這是我在pcUser的「<em>Windows 7 頂級重灌</em>術」一書學到的密技～大家都知道有Windows有控制台這個東東吧～在Win7裡還隱藏了更厲害的控制台-「上帝模式」（網友俗稱！微軟官方不是這樣叫的）裡面蒐錄了276個設定捷徑喔！<br /><strong><em>警告：這是在Windows 7使用的，拿到其他作業系統使用可能會造成無法正常開機喔！</em></strong></p>
+<p><img loading="lazy" decoding="async" title="Win7上帝模式" border="0" alt="Win7上帝模式" src="http://lh6.ggpht.com/_lmr-EyXhd9Q/TG6OhxbYdwI/AAAAAAAAAPQ/qWKHMtTTdmQ/Image.png?imgmax=800" width="606" height="574"></p>
+<h3><img loading="lazy" decoding="async" title="Win7上帝模式-圖示" border="0" alt="Win7上帝模式-圖示" align="left" src="http://lh4.ggpht.com/_lmr-EyXhd9Q/TG6OmVL8XDI/AAAAAAAAAPU/Z82t46n8OYE/Image.png?imgmax=800" width="116" height="199">使用方法：</h3>
+<p>隨便在一個地方新增資料夾，這個資料夾的名字要取：<br />「<strong>工程模式.{ED7BA470-8E54-465E-825C-99712043E01C}</strong>」（藍色字是你要取什麼名字隨你高興）建完後你會發現原本後面這一長串字消失了，而圖示變成控制台的圖示，看到這種現象就表示成功了，趕快點進去看看效果吧！</p>
+<h3> </h3>
+<h3> </h3>
+<h3> </h3>
+<h3>其他相關、參考資料：</h3>
+<p>另外我這個死小孩的好奇心又來了，還上網找了相關資料，正好讓我找到更有趣的網頁-香腸炒魷魚的<a href="http://sofree.cc/windows7-godmode/" target="_blank">酷！16種Windows7的「GodMode」上帝模式？</a>這裡還有其他16種內部指令的用法喔！有興趣的話好好玩一玩！</p>
+<p>還有相關新聞：<a href="http://www.zdnet.com.tw/news/software/0,2000085678,20143622,00.htm" target="_blank">[獨家] Windows 7還有更多「上帝模式」</a></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/old/%e4%bf%97%e7%a8%b1%e7%9a%84%e4%b8%8a%e5%b8%9d%e6%a8%a1%e5%bc%8f-%e5%95%9f%e5%8b%95%e4%bd%a0%e7%9a%84windows-7%e7%84%a1%e6%95%b5%e6%8e%a7%e5%88%b6%e5%8f%b0/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>察看你的系統64位元還是32位元</title>
+		<link>/old/%e5%af%9f%e7%9c%8b%e4%bd%a0%e7%9a%84%e7%b3%bb%e7%b5%b164%e4%bd%8d%e5%85%83%e9%82%84%e6%98%af32%e4%bd%8d%e5%85%83/</link>
+					<comments>/old/%e5%af%9f%e7%9c%8b%e4%bd%a0%e7%9a%84%e7%b3%bb%e7%b5%b164%e4%bd%8d%e5%85%83%e9%82%84%e6%98%af32%e4%bd%8d%e5%85%83/#respond</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Wed, 21 Jul 2010 03:15:00 +0000</pubDate>
+				<category><![CDATA[未整理舊文]]></category>
+		<category><![CDATA[作業系統]]></category>
+		<category><![CDATA[軟體相關]]></category>
+		<guid isPermaLink="false">http://blog.yuan817.twbbs.org/2010/07/%e5%af%9f%e7%9c%8b%e4%bd%a0%e7%9a%84%e7%b3%bb%e7%b5%b164%e4%bd%8d%e5%85%83%e9%82%84%e6%98%af32%e4%bd%8d%e5%85%83/</guid>
+
+					<description><![CDATA[我前天收到e-mail，有人在下載軟體時有分64位元和32位元版，不知道要下載哪一種&#8230;&#8230; 如果你的電腦是64位元的，有64位元的軟體就盡量用64位元的，沒有64位元的軟體才去用32位元的。雖然64位元的電腦能向下相容32位元的軟體，但就無法發揮64位元的效能！ 要看這個作業系統是用32位元或64位元的話，可以按開始功能表的「控制台」→「系統及安全性」→「系統」，在「系統類型&#8230;]]></description>
+										<content:encoded><![CDATA[<p>我前天收到e-mail，有人在下載軟體時有分64位元和32位元版，不知道要下載哪一種&#8230;&#8230;</p>
+<p>如果你的電腦是64位元的，有64位元的軟體就盡量用64位元的，沒有64位元的軟體才去用32位元的。<u>雖然64位元的電腦能向下相容32位元的軟體，但就無法發揮64位元的效能！</u><img loading="lazy" decoding="async" alt="" src="http://gfx2.hotmail.com/mail/w4/pr01/ltr/emoticons/smile_regular.gif" width="19" height="19"></p>
+<p>要看這個作業系統是用32位元或64位元的話，<br />可以按開始功能表的「控制台」→「系統及安全性」→「系統」，在「系統類型」那裡應該就能看到！</p>
+<p><img loading="lazy" decoding="async" title="Windows7 x64 位元系統資訊" border="0" alt="Windows7 x64 位元系統資訊" src="http://lh4.ggpht.com/_lmr-EyXhd9Q/TEZmERIUo9I/AAAAAAAAAMY/KiqhePeG3hs/Image.png?imgmax=800" width="617" height="347"></p>
+<p>或是打開C 槽裡面，如果看到有「Program Files」和「Program Files (x86)」的話，就是64位元的電腦！</p>
+<p>64位元的軟體預設都會灌在一般的「Program Files」，而32位元的就會灌在「Program Files (x86)」裡！</p>
+<p><img loading="lazy" decoding="async" title="Win7 Windows 資料夾" border="0" alt="Win7 Windows 資料夾" src="http://lh3.ggpht.com/_lmr-EyXhd9Q/TEZmNJAQMJI/AAAAAAAAAMc/TeRLZkpP4KE/Win7%20Windows%20%C3%87%C2%99%3E%5B12%5D.png?imgmax=800" width="499" height="455"></p>
+<p>在下載軟體時，有些檔案名稱後面會有什麼「-i386」、「-amd64」、「x86」、「x64」的字樣&#8230;&#8230;</p>
+<ul>
+<li>-i386、x86：適用於32位元的電腦  </li>
+<li>-amd64、x64：適用於64位元的電腦，雖然名稱叫amd，但Intel64位元的CPU也適用！</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>/old/%e5%af%9f%e7%9c%8b%e4%bd%a0%e7%9a%84%e7%b3%bb%e7%b5%b164%e4%bd%8d%e5%85%83%e9%82%84%e6%98%af32%e4%bd%8d%e5%85%83/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>小白(這台筆電)使用還原片重灌</title>
+		<link>/old/%e5%b0%8f%e7%99%bd%e9%80%99%e5%8f%b0%e7%ad%86%e9%9b%bb%e4%bd%bf%e7%94%a8%e9%82%84%e5%8e%9f%e7%89%87%e9%87%8d%e7%81%8c/</link>
+					<comments>/old/%e5%b0%8f%e7%99%bd%e9%80%99%e5%8f%b0%e7%ad%86%e9%9b%bb%e4%bd%bf%e7%94%a8%e9%82%84%e5%8e%9f%e7%89%87%e9%87%8d%e7%81%8c/#respond</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Tue, 22 Jun 2010 03:53:00 +0000</pubDate>
+				<category><![CDATA[未整理舊文]]></category>
+		<category><![CDATA[作業系統]]></category>
+		<guid isPermaLink="false">http://blog.yuan817.twbbs.org/2010/06/%e5%b0%8f%e7%99%bd%e9%80%99%e5%8f%b0%e7%ad%86%e9%9b%bb%e4%bd%bf%e7%94%a8%e9%82%84%e5%8e%9f%e7%89%87%e9%87%8d%e7%81%8c/</guid>
+
+					<description><![CDATA[這台筆電已經用了一段時間，隨著時間軟體越灌越多，搞到後來整個速度真的是其慢無比，慢到連要開個檔案總管都要花好一段時間，根本吃不消～ 所以我決定使用廠方附的還原片，將電腦還原到出廠時的狀況。平常買電腦時，盒裝裡都一定會包含充電器、說明書、還原片、驅動程式片，通常還原片都會和說明書放在一起&#8230;&#8230;圖中的是我已經把還原片和驅動程式片都拿出來了～ 還原片的使用： 警告！使用還原片會把整&#8230;]]></description>
+										<content:encoded><![CDATA[<p><a href="http://lh5.ggpht.com/_lmr-EyXhd9Q/TCAziJEMEkI/AAAAAAAAAG0/9bkstDdm98w/s1600-h/DSC04072%5B6%5D.jpg"><img loading="lazy" decoding="async" title="DSC04072" border="0" alt="DSC04072" src="http://lh4.ggpht.com/_lmr-EyXhd9Q/TCAzl1lUxPI/AAAAAAAAAG4/ygmd0MQMjXE/DSC04072_thumb%5B4%5D.jpg?imgmax=800" width="484" height="363"></a> </p>
+<p>這台筆電已經用了一段時間，隨著時間軟體越灌越多，搞到後來整個速度真的是其慢無比，慢到連要開個檔案總管都要花好一段時間，根本吃不消～</p>
+<p>所以我決定使用廠方附的還原片，將電腦還原到出廠時的狀況。平常買電腦時，盒裝裡都一定會包含充電器、說明書、還原片、驅動程式片，通常還原片都會和說明書放在一起&#8230;&#8230;圖中的是我已經把還原片和驅動程式片都拿出來了～</p>
+<h3>還原片的使用：</h3>
+<p><strong>警告！使用還原片會把整個電腦裡的資料統統消除！一定要備份好所有資料後再使用！！</strong></p>
+<p>要使用還原片其實比想像中的簡單～只要把還原片放進電腦，並從光碟開機，再來只要照螢幕上的指示做就行了！雖然用說的很簡單，但我在大前天實際操作時就花了一整天～對了！雖然有還原片，不過在還原過程中可能要用到廠商附的驅動程式片喔～（我那時就是以為有還原片就包天下，到後來看到螢幕上要求放入驅動程式片，我就&#8230;&#8230;）</p>
+<p>放光碟時要分清楚要放的是還原片，不是驅動程式片、軟體安裝片喔～<br />放進去之後把電腦重開機→開機時一進入電腦商Logo或是BIOS電腦檢測畫面<strong>就馬上按「Esc」進入開機選單</strong>（華碩是這樣，其他電腦可能是按其他鍵，有的電腦不能直接進入選單就得先到BIOS調第一順位為光碟開機，如果不懂的話可以問我喔～）<br />→然後選擇光碟，再來應該會進入還原的畫面！每一家電腦商的還原介面會不一樣，不過操作上應該是大同小異，只要照著螢幕上的指示，應該不會有問題。</p>
+<p>在操作上可能會遇到的選項：我之前還原時有跑出三個選項：</p>
+<ul>
+<li>只還原第一個硬碟分割區（就是指C槽，其他像是D槽的東西都不受影響）</li>
+<li>還原整顆硬碟，並只分割一個硬碟分割區（整個硬碟都會被還原，還原後只有C槽給你用，但C槽就是整顆硬碟的空間）</li>
+<li>還原整顆硬碟，並分割兩個硬碟分割區（整個硬碟都會被還原，還原後會分C、D槽，我比較建議這樣，因為系統、軟體放C槽，資料放D槽，到時候如果系統出問題好歹資料還在）</li>
+</ul>
+<p>選擇完，再經過確認之後，就開始還原了！途中可能會出現命令提示字元～這都是正常情況，只要等下去就行了，預計要花好幾個小時，<strong>途中可能會退出光碟片並說請插入驅動程式光碟</strong>，這時就要找出廠商的驅動程式片放入然後繼續還原！還原完之後重開機，全新剛買回來的系統的樣子就出來了！！</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/old/%e5%b0%8f%e7%99%bd%e9%80%99%e5%8f%b0%e7%ad%86%e9%9b%bb%e4%bd%bf%e7%94%a8%e9%82%84%e5%8e%9f%e7%89%87%e9%87%8d%e7%81%8c/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

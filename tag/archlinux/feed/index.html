@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ArchLinux &#8211; 元兒～ 技術筆記</title>
+	<atom:link href="/tag/archlinux/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Mon, 10 Dec 2018 17:59:41 +0000</lastBuildDate>
+	<language>zh-TW</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/09/pc-programming-icon-150x150.png</url>
+	<title>ArchLinux &#8211; 元兒～ 技術筆記</title>
+	<link>/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>6/5-ArchLinux重大更新紀錄</title>
+		<link>/old/archlinux-update/</link>
+					<comments>/old/archlinux-update/#respond</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Wed, 05 Jun 2013 17:02:05 +0000</pubDate>
+				<category><![CDATA[未整理舊文]]></category>
+		<category><![CDATA[ArchLinux]]></category>
+		<category><![CDATA[玩Linux的日記]]></category>
+		<category><![CDATA[軟體相關]]></category>
+		<guid isPermaLink="false">http://blog.yuan817.twbbs.org/?p=322</guid>
+
+					<description><![CDATA[這次ArchLinux的重大升級&#60;span style=&#34;color:#FF0000;&#34;&#62;&#60;strong&#62;需要人工處理&#60;/strong&#62;&#60;/span&#62;，因為此升級有包含改變檔案目錄的架構，將原本放在根目錄的執行檔、函式庫全部移到/usr/相對應的資料夾裡面！ 所以無法單單使用 sudo pacman -Syu 來進行升級喔～ &#038;l&#8230;]]></description>
+										<content:encoded><![CDATA[<pre><code>這次ArchLinux的重大升級&lt;span style=&quot;color:#FF0000;&quot;&gt;&lt;strong&gt;需要人工處理&lt;/strong&gt;&lt;/span&gt;，因為此升級有包含改變檔案目錄的架構，將原本放在根目錄的執行檔、函式庫全部移到/usr/相對應的資料夾裡面！
+
+
+
+所以無法單單使用
+</code></pre>
+<pre class="brush:bash;">
+sudo pacman -Syu</pre>
+<pre><code>來進行升級喔～
+
+
+
+&lt;a href=&quot;http://www.plurk.com/p/ipdg7x&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;http://i.imgur.com/srbjLNE.png&quot; style=&quot;width: 964px; height: 671px;&quot; /&gt;&lt;/a&gt;&lt;br /&gt;
+▲ Carl大大說: &lt;span class=&quot;plurk_content&quot;&gt;簡單來說就是所有執行檔併入 /usr/bin/，如果遇到上圖情形是正常的&lt;/span&gt;
+</code></pre>
+<h2>
+    請先備份系統<br />
+</h2>
+<pre><code>&lt;strong&gt;&lt;span style=&quot;color:#FF0000;&quot;&gt;警告！因為這次升級會更改檔案目錄的架構，有可能升級後會出現錯亂或是無法開機的狀況，請升級前先把你的系統備份好！！&lt;/span&gt;&lt;/strong&gt;
+
+
+
+我是使用&lt;a class=&quot;ex_link&quot; href=&quot;http://clonezilla.nchc.org.tw/clonezilla-live/download/sourceforge/&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot;&gt;Clonezilla再生龍&lt;/a&gt;(可以當作是類似的Ghost)把系統備份下來，至於也有人提供其他種備份的方式，可以參考&lt;a href=&quot;http://www.plurk.com/p/ipn8jj&quot; target=&quot;_blank&quot;&gt;這個噗的討論&lt;/a&gt;！
+
+
+
+&amp;nbsp;
+</code></pre>
+<h2>
+    那我要怎麼升級呢？<br />
+</h2>
+<pre><code>可以參考&lt;a href=&quot;http://www.plurk.com/p/ipdg7x&quot; target=&quot;_blank&quot;&gt;Carl大大的公告噗&lt;/a&gt;，也可以看&lt;span class=&quot;plurk_content&quot;&gt;&lt;a class=&quot;ex_link&quot; href=&quot;https://www.archlinux.org/news/binaries-move-to-usrbin-requiring-update-intervention/&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot;&gt;官方公告&lt;/a&gt; or &lt;a class=&quot;ex_link&quot; href=&quot;https://plus.google.com/u/0/107142103119739092775/posts/WqsGuWzzPnV&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot;&gt;中文翻譯&lt;/a&gt;&lt;/span&gt;，這邊都有詳盡的說明，而且寫得絕對比我這篇完善許多XD。
+
+
+
+&lt;strong&gt;&lt;span style=&quot;color:#FF0000;&quot;&gt;絕對不要自己手動移動檔案目錄，這樣會出問題的阿！！別以為/bin /lib目錄是廢棄不用的阿～&lt;/span&gt;&lt;/strong&gt;
+
+
+
+而我是按照官方的說明下指令升級的
+</code></pre>
+<pre class="brush:bash;">
+sudo -i
+pacman -Qqo /bin /sbin /usr/sbin | pacman -Qm -
+paclist &lt;repo&gt; | awk &#39; { print $1 } &#39; | pacman -Ql - | grep &#39; /s\?bin/\| /usr/sbin/&#39; #這行下了以後我這邊有出現&quot;|&quot;的錯誤，不過我沒理就是了
+find /bin /sbin /usr/sbin -exec pacman -Qo -- {} + &gt;/dev/null #這行下了以後我這邊也有出現錯誤，不過我也沒理就是了
+pacman -Syu --ignore filesystem,bash
+pacman -S bash
+pacman -Su
+exit</pre>
+<pre><code>然後再把電腦重開機，看看升級之後能不能正常開機使用。
+
+
+
+我這邊是很順利平安的升級成功了！到寫這篇文時，還沒遇到什麼後遺症就是了！
+</code></pre>
+<h2>
+    升級之後會有什麼改變？<br />
+</h2>
+<pre><code>主要就是目錄結構有變動，將下表原本放的地方全部移到合併後的/usr裡面，在原本根目錄那邊則是以連結(捷徑)的方式對應到合併後的資料夾裡！！
+
+
+
+至於&lt;a href=&quot;http://www.plurk.com/p/ipoi76&quot; target=&quot;_blank&quot;&gt;我已經成功升級的噗浪討論可以參考這裡&lt;/a&gt;。
+</code></pre>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 500px;">
+<thead>
+<tr>
+<th scope="col">
+                原本的位址
+            </th>
+<th scope="col">
+                合併後的位址
+            </th>
+</tr>
+</thead>
+<caption>
+        檔案目錄改變的地方<br />
+    </caption>
+<tbody>
+<tr>
+<td>
+                /bin/
+            </td>
+<td>
+                /usr/bin/
+            </td>
+</tr>
+<tr>
+<td>
+                /sbin/
+            </td>
+<td>
+                /usr/bin/
+            </td>
+</tr>
+<tr>
+<td>
+                /lib/
+            </td>
+<td>
+                /usr/lib/
+            </td>
+</tr>
+<tr>
+<td>
+                /lib32/
+            </td>
+<td>
+                /usr/lib/
+            </td>
+</tr>
+</tbody>
+</table>
+<pre><code>&lt;img alt=&quot;&quot; src=&quot;http://images.plurk.com/nIBG-5NGAlxe6UVNBbvOO6HhtH2.jpg&quot; style=&quot;width: 800px; height: 450px;&quot; /&gt;
+</code></pre>
+]]></content:encoded>
+					
+					<wfw:commentRss>/old/archlinux-update/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
