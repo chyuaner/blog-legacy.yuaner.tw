@@ -12,7 +12,7 @@
 	<atom:link href="//blog-legacy.yuaner.tw/tag/linux/feed/" rel="self" type="application/rss+xml" />
 	<link>//blog-legacy.yuaner.tw/</link>
 	<description>本站不再維護更新，新內容請移駕去新站</description>
-	<lastBuildDate>Wed, 18 Jun 2025 01:43:37 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 18 Jun 2025 17:49:58 +0000</lastBuildDate>
 	<language>zh-TW</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,161 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>處理WordPress經過Cloudflare的https對應</title>
+		<link>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/</link>
+					<comments>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/#respond</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2025 16:45:31 +0000</pubDate>
+				<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[資訊技術]]></category>
+		<category><![CDATA[cloudflare]]></category>
+		<category><![CDATA[wordpress]]></category>
+		<category><![CDATA[架站]]></category>
+		<category><![CDATA[玩Linux的日記]]></category>
+		<guid isPermaLink="false">//blog-legacy.yuaner.tw/?p=886</guid>
+
+					<description><![CDATA[這應該是倒數第二篇了吧，想不到為了裝靜態化要用的Plugin，結果被逼要先升級系統，然後在升級系統的過程中又遇到對外線路有問題，在處理的時候就乾脆來寫經驗心得文做個紀錄。 我這邊的主機線路是：對外網 &#8212; Cloudflare &#8212; Reverse Proxy &#8212; WordPress Cloudflare設定的地方在 Dashboard→「SSL/TLS」→「概觀」&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>這應該是倒數第二篇了吧，想不到為了裝靜態化要用的Plugin，結果被逼要先升級系統，然後在升級系統的過程中又遇到對外線路有問題，在處理的時候就乾脆來寫經驗心得文做個紀錄。</p>
+
+
+
+<p>我這邊的主機線路是：<br>對外網 &#8212; Cloudflare &#8212; Reverse Proxy &#8212; WordPress</p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">Cloudflare設定的地方在</h2>
+
+
+
+<p>Dashboard→「SSL/TLS」→「概觀」→「自訂SSL/TLS」那邊</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="712" height="1024" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png" alt="" class="wp-image-889" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png 712w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-209x300.png 209w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-768x1104.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-1068x1536.png 1068w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account.png 1334w" sizes="(max-width: 712px) 100vw, 712px" /></figure>
+
+
+
+<h2 class="wp-block-heading">一個解法：Cloudflare走flexable模式</h2>
+
+
+
+<p>好處：簡單方便 缺點：是強制主機送https超連結，主機自身自己不知道有https，容易造成線路混亂。</p>
+
+
+
+<p>我的網路線路就是：</p>
+
+
+<figure class="wp-block-table">
+<table class="has-fixed-layout">
+<tbody>
+<tr>
+<td class="has-text-align-center" colspan="2" data-align="center">對外網</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Cloudflare</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Reverse Proxy</td>
+<td class="has-text-align-center" colspan="2" data-align="center">WordPress</td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"> </td>
+<td class="has-text-align-center has-light-green-cyan-background-color has-background" colspan="2" data-align="center">http 443</td>
+<td class="has-text-align-center has-luminous-vivid-amber-background-color has-background" colspan="4" data-align="center">http 80</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+<p>WordPress主機視角: 全程都是http，不知道自己是https</p>
+
+
+
+<p>從Cloudflare到Worepress這段走80純http，但是對外到Cloudflare這邊走https。<br>因為Wordpress自己不知道是走https，所以由Wordpress輸出的所有連結都會是http，必須手動改設定強制都送https超連結。</p>
+
+
+
+<p>改wp-config.php 強制開 HTTPS：</p>
+
+
+
+<pre class="wp-block-code"><code>$_SERVER&#091;&#039;HTTPS&#039;] = &#039;on&#039;;</code></pre>
+
+
+
+<h2 class="wp-block-heading">另一個解法：Cloudflare走full模式（我最後採用的方案 ）</h2>
+
+
+
+<p>缺點：設定麻煩一些 好處：可以讓目標主機知道</p>
+
+
+
+<p>我的網路線路就是：</p>
+
+
+<figure class="wp-block-table">
+<table class="has-fixed-layout">
+<tbody>
+<tr>
+<td class="has-text-align-center" colspan="2" data-align="center">對外網</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Cloudflare</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Reverse Proxy</td>
+<td class="has-text-align-center" colspan="2" data-align="center">WordPress</td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"> </td>
+<td class="has-text-align-center has-light-green-cyan-background-color has-background" style="text-align: center;" colspan="4" data-align="center">http 443</td>
+<td class="has-text-align-center has-luminous-vivid-amber-background-color has-background" colspan="2" data-align="center">http 80</td>
+<td class="has-text-align-center" data-align="center"> </td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+<p>WordPress主機視角: 雖然傳輸是http，但可以從封包header知道現在是https</p>
+
+
+
+<p>然後Reverse Proxy這層要加入以下內容，讓可以識別是不是https的header能正確傳給Wordpress那邊：</p>
+
+
+
+<pre class="wp-block-code"><code>proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-For $remote_addr;
+proxy_set_header Host $host;</code></pre>
+
+
+
+<p>wp-config.php</p>
+
+
+
+<pre class="wp-block-code"><code>if (isset($_SERVER&#091;&#039;HTTP_X_FORWARDED_PROTO&#039;]) &amp;&amp; $_SERVER&#091;&#039;HTTP_X_FORWARDED_PROTO&#039;] === &#039;https&#039;) {
+    $_SERVER&#091;&#039;HTTPS&#039;] = &#039;on&#039;;
+}</code></pre>
+
+
+
+<p>本來想說這篇寫在新站，不過想想是和Wordpress有關，所以還是先當作這裡Wordpress舊站的倒數兩篇吧～</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>6/5-ArchLinux重大更新紀錄</title>
 		<link>//blog-legacy.yuaner.tw/old/archlinux-update/</link>
 					<comments>//blog-legacy.yuaner.tw/old/archlinux-update/#respond</comments>
@@ -179,7 +334,7 @@ exit</pre>
 
 					<description><![CDATA[最近這個暑假，開始有寫Android App的興致了&#8230;&#8230;平常我一直都用是待在我最喜歡的Ubuntu作業系統裡，也很理所當然的在Ubuntu裡開發Android App啦～ 網路上很多人的方式是到Eclipse官方網站下載主程式，然後解壓縮後直接執行Eclipse，再安裝Android SDK。 而我的方式是直接用Ubuntu套件庫安裝Eclipse主程式，然後用root的權&#8230;]]></description>
 										<content:encoded><![CDATA[<p>最近這個暑假，開始有寫Android App的興致了&#8230;&#8230;平常我一直都用是待在我最喜歡的Ubuntu作業系統裡，也很理所當然的在Ubuntu裡開發Android App啦～</p>
-<div><a href="http://1.bp.blogspot.com/-NLZO0lGb1ro/UD3Eb2iv2RI/AAAAAAAACfI/lZ0vxJ4ctc0/s1600/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_015.png" imageanchor="1"><img fetchpriority="high" decoding="async" border="0" height="358" src="http://1.bp.blogspot.com/-NLZO0lGb1ro/UD3Eb2iv2RI/AAAAAAAACfI/lZ0vxJ4ctc0/s640/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_015.png" width="640"></a></div>
+<div><a href="http://1.bp.blogspot.com/-NLZO0lGb1ro/UD3Eb2iv2RI/AAAAAAAACfI/lZ0vxJ4ctc0/s1600/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_015.png" imageanchor="1"><img decoding="async" border="0" height="358" src="http://1.bp.blogspot.com/-NLZO0lGb1ro/UD3Eb2iv2RI/AAAAAAAACfI/lZ0vxJ4ctc0/s640/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_015.png" width="640"></a></div>
 <p>網路上很多人的方式是到<a href="http://www.eclipse.org/downloads/" target="_blank">Eclipse官方網站下載主程式</a>，然後解壓縮後直接執行Eclipse，再安裝Android SDK。</p>
 <p>而<span>我的方式是直接用Ubuntu套件庫安裝Eclipse主程式，然後用root的權限打開Eclipse，在Eclipse裡安裝好Android SDK之後，才用平常的方式（一般使用者權限）開啟Eclipse開發Android App。</span>想說用這樣的方式，除了程式集會自動加入Eclipse以外，用套件的方式安裝方便讓這台電腦這個作業系統內其他使用者帳號也可以用，心理也覺得用套件管理程式安裝的話，日後軟體也比較方便用套件管理程式管理&#8230;<br /><span id="more-41"></span></p>
 <h3>我的安裝方式：（以下我在Ubuntu 12.04示範）</h3>
@@ -191,7 +346,7 @@ exit</pre>
 <h4>2. 在Eclipse裡安裝Android SDK</h4>
 <p><span>如果是用第1點的方式用套件管理程式安裝Eclipse的話 請不要直接打開Eclipse這個軟體，不然會在&#8221;Install New Software&#8221;那邊卡住</span></p>
 <p>請打開終端機 → 輸入&#8221;<span>sudo eclipse</span>&#8220;（以root的帳號打開Eclipse這個軟體）</p>
-<div><a href="http://2.bp.blogspot.com/-kIjsnXKwbYA/UD3FKINhPGI/AAAAAAAACfY/NfPo-0L8UmQ/s1600/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_021.png" imageanchor="1"><img decoding="async" border="0" height="356" src="http://2.bp.blogspot.com/-kIjsnXKwbYA/UD3FKINhPGI/AAAAAAAACfY/NfPo-0L8UmQ/s640/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_021.png" width="640"></a></div>
+<div><a href="http://2.bp.blogspot.com/-kIjsnXKwbYA/UD3FKINhPGI/AAAAAAAACfY/NfPo-0L8UmQ/s1600/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_021.png" imageanchor="1"><img loading="lazy" decoding="async" border="0" height="356" src="http://2.bp.blogspot.com/-kIjsnXKwbYA/UD3FKINhPGI/AAAAAAAACfY/NfPo-0L8UmQ/s640/%E5%B7%A5%E4%BD%9C%E5%8D%80+1_021.png" width="640"></a></div>
 <p>以root的權限打開Eclipse以後: 按下功能表上的&#8221;<b><span>Help</span></b>&#8221; → &#8220;<b><span>Install New Software&#8230;</span></b>&#8220;</p>
 <div><a href="http://2.bp.blogspot.com/-vJRohe85vkI/UD3ErNqpl8I/AAAAAAAACfQ/FYGLTYRjZUk/s1600/%E6%93%B7%E5%8F%96%E9%81%B8%E5%8F%96%E5%8D%80%E5%9F%9F_022.png"><img loading="lazy" decoding="async" border="0" height="282" src="http://2.bp.blogspot.com/-vJRohe85vkI/UD3ErNqpl8I/AAAAAAAACfQ/FYGLTYRjZUk/s320/%E6%93%B7%E5%8F%96%E9%81%B8%E5%8F%96%E5%8D%80%E5%9F%9F_022.png" width="320"></a></div>
 <p><span><span><span lang="en-US"> </span></span></span><br />出現&#8221;Install&#8221;視窗後: 在&#8221;Work with&#8221;那邊輸入&#8221;<span> https://dl-ssl.google.com/android/eclipse/</span> &#8221; → 把整個&#8221;<b><span>Developer Tools</span></b>&#8220;和&#8221;<b><span>NDK Plugins（選用）</span></b>&#8220;那地方勾起來後 → 再按下&#8221;Next&#8221; → 再次按下&#8221;Next&#8221; → 在這邊當然要選擇&#8221;<span>I accept the terms of the license agreements</span>&#8220;囉 → 接下來就泡茶喝果汁，等待完成Android開發環境的安裝吧！！</p>
@@ -588,54 +743,6 @@ PS.我已經把我之前下載到的字典檔全部都放到我的MF免空了，
 ]]></content:encoded>
 					
 					<wfw:commentRss>//blog-legacy.yuaner.tw/old/%e5%8d%87%e7%b4%9a%e5%89%8dlinux-ubuntu-9-04%e6%9c%80%e5%be%8c%e7%9a%84%e7%95%ab%e9%9d%a2/feed/</wfw:commentRss>
-			<slash:comments>0</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>Pidgin整合即時通與Facebook聊天功能整合！</title>
-		<link>//blog-legacy.yuaner.tw/old/pidgin%e6%95%b4%e5%90%88%e5%8d%b3%e6%99%82%e9%80%9a%e8%88%87facebook%e8%81%8a%e5%a4%a9%e5%8a%9f%e8%83%bd%e6%95%b4%e5%90%88%ef%bc%81/</link>
-					<comments>//blog-legacy.yuaner.tw/old/pidgin%e6%95%b4%e5%90%88%e5%8d%b3%e6%99%82%e9%80%9a%e8%88%87facebook%e8%81%8a%e5%a4%a9%e5%8a%9f%e8%83%bd%e6%95%b4%e5%90%88%ef%bc%81/#respond</comments>
-		
-		<dc:creator><![CDATA[元兒～]]></dc:creator>
-		<pubDate>Fri, 19 Feb 2010 23:39:00 +0000</pubDate>
-				<category><![CDATA[未整理舊文]]></category>
-		<category><![CDATA[玩Linux的日記]]></category>
-		<category><![CDATA[軟體相關]]></category>
-		<guid isPermaLink="false">http://blog.yuan817.twbbs.org/2010/02/pidgin%e6%95%b4%e5%90%88%e5%8d%b3%e6%99%82%e9%80%9a%e8%88%87facebook%e8%81%8a%e5%a4%a9%e5%8a%9f%e8%83%bd%e6%95%b4%e5%90%88%ef%bc%81/</guid>
-
-					<description><![CDATA[之前我曾介紹過Pidgin這隻程式：http://yuan817.blogspot.com/2010/01/pidgin.html，它支援MSN、Yahoo、ICQ、Google talk、Facebook（目前成功一半）、AIM、QQ&#8230;&#8230;即時通通訊協定。Facebook有聊天功能，就真的有人做了Pidgin外掛，裝了以後就能直接在Pidgin使用Facebook聊天功能，&#8230;]]></description>
-										<content:encoded><![CDATA[<p>之前我曾介紹過Pidgin這隻程式：<a href="http://yuan817.blogspot.com/2010/01/pidgin.html">http://yuan817.blogspot.com/2010/01/pidgin.html</a>，<br />它支援<span>MSN、Yahoo、ICQ、Google talk、Facebook（目前成功一半）、AIM、QQ&#8230;&#8230;即時通通訊協定。<br />Facebook有聊天功能，就真的有人做了Pidgin外掛，裝了以後就能直接在Pidgin使用Facebook聊天功能，不需再開Facebook網頁就能上線。<br />不過幾個月前我試過了，都失敗了，昨天我更新外掛後還是失敗收場，今天終於成功了，目前的問題除了不穩定外，我方、對方的聊天視窗竟然是分開的。<br /><span><a href="https://0dvkjg.bay.livefilestore.com/y1mCTcVhaNTGcZSg_iGB_4Lljmhm0av9N0dd-BsBHpCq1QaT9C5Xw8GRd-wH1z6h9LxENh96roSxuOyPe-8xbrFXJKf39cG_sIZmrC6cfi2Z0Wx9l8e2HJV4933QlaNqPRw55Q48KtwC7gfF0GjeifBIw/1_001.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1mCTcVhaNTGcZSg_iGB_4Lljmhm0av9N0dd-BsBHpCq1QaT9C5Xw8GRd-wH1z6h9LxENh96roSxuOyPe-8xbrFXJKf39cG_sIZmrC6cfi2Z0Wx9l8e2HJV4933QlaNqPRw55Q48KtwC7gfF0GjeifBIw/1_001.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1mCTcVhaNTGcZSg_iGB_4Lljmhm0av9N0dd-BsBHpCq1QaT9C5Xw8GRd-wH1z6h9LxENh96roSxuOyPe-8xbrFXJKf39cG_sIZmrC6cfi2Z0Wx9l8e2HJV4933QlaNqPRw55Q48KtwC7gfF0GjeifBIw/1_001.png" alt=""></a></span></span></p>
-<div><span><br /></span></p>
-<hr size="2" width="100%"><span>使用筆記：<br /></span><br /><span><span>如果成功登入後會發現明明加了那麼多朋友，為什麼只出現一點點？根據我的測試，只會出現目前在線上的人，下線的人可能也會出現，反正上線的一定會出現！</span></span></div>
-<div><span><br /></span></div>
-<div><span>使用Linux Ubuntu 9.10，而且即時通是用Pidgin的人（這是推測！我未在9.10嘗試過）：</span></p>
-<blockquote><p><span></span><span>可以直接從套件庫</span>安裝「pidgin-facebookchat」，安裝後需把Pidgin關掉後重開，再來<span>在Pidgin新增帳號，</span><span>在「新增帳號」裡的通訊協定</span><span>應該就能看到Facebook，然後輸入帳號密碼後，應該就可以試試看能不能登入，登入後要等一分鐘過後還沒斷線才算登入成功。如果出現「伺服器停止連線」字樣的話，多試幾次或換個時間試看看。</span><span>也可以在「修改帳號」裡的「進階設定」調看看</span>。<br />另外我建議不要勾選「Show history in new conversations」，照我測試結果，如果勾選可能會讓沒上線的人卻顯示為上線！</p></blockquote>
-<p>使用<span></span>Linux Ubuntu 9.04的人（我就在這版本安裝試驗）：</p>
-<blockquote><p>Ubuntu 9.04套件庫中的「pidgin-facebookchat」過於老舊，無法直接安裝使用，需另外到<a href="http://code.google.com/p/pidgin-facebookchat/">Pidgin-facebookchat計畫網站下載「pidgin-facebookchat-1.64.tar.bz2」檔案：http://code.google.com/p/pidgin-facebookchat/</a>。<br /><span></span><span></span><span></span><span></span><span></span><span><a href="https://0dvkjg.bay.livefilestore.com/y1mKIvNgQBlrda5Nwj450U2p9osXZF4qMq2Eaz2xoDBK7G8rZhkbiMD-mfxWVeKVMWHow8kL3i57eNvJGEZDkOqYo1pr3V158tAEpuEgrAdIZq-D5_epa5ym9-PKrGj42MIdBEkwX7i2H9hRPokkAQsOw/FacebookChat1.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1mKIvNgQBlrda5Nwj450U2p9osXZF4qMq2Eaz2xoDBK7G8rZhkbiMD-mfxWVeKVMWHow8kL3i57eNvJGEZDkOqYo1pr3V158tAEpuEgrAdIZq-D5_epa5ym9-PKrGj42MIdBEkwX7i2H9hRPokkAQsOw/FacebookChat1.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1mKIvNgQBlrda5Nwj450U2p9osXZF4qMq2Eaz2xoDBK7G8rZhkbiMD-mfxWVeKVMWHow8kL3i57eNvJGEZDkOqYo1pr3V158tAEpuEgrAdIZq-D5_epa5ym9-PKrGj42MIdBEkwX7i2H9hRPokkAQsOw/FacebookChat1.png" alt=""></a></span><span></span><span></span><span></span></p>
-<p>注意！<b>不要下載pidgin-facebookchat-1.64<span>.deb</span>檔案</b><b>！！！</b>，因為這個檔案是針對<span>Ubuntu 9.10製作，我之前安裝時就卡在相依性問題，無法按照正常程序裝，只能手動安裝來避開相依性驗證！！！<br /></span><span></span><br /><span>因為這是.tar.bz2檔，安裝方式會不同！<br />下載後到存放的資料夾按滑鼠右鍵選「以其他程式開啟」→出現視窗後在下方「使用自訂指令」的地方輸入「gksu file-roller」（因為要賦予管理者的權限，所以不能直接開）</span><span><a href="https://0dvkjg.bay.livefilestore.com/y1m_G_oVS_omM7jZi1CXcneXgZ5168BcF6k3BM9obEMv_Mj4Y9r-oNFmF-sZIWY8IHwVlPxEegSXqQyPOcyAFDzLIguxs63k0dRm-pkm4uNCN1ML-EZ1aiHL-AaqhKUPwIWFicOCQSpdJBLpr78gxOvJg/FacebookChat2.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1m_G_oVS_omM7jZi1CXcneXgZ5168BcF6k3BM9obEMv_Mj4Y9r-oNFmF-sZIWY8IHwVlPxEegSXqQyPOcyAFDzLIguxs63k0dRm-pkm4uNCN1ML-EZ1aiHL-AaqhKUPwIWFicOCQSpdJBLpr78gxOvJg/FacebookChat2.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1m_G_oVS_omM7jZi1CXcneXgZ5168BcF6k3BM9obEMv_Mj4Y9r-oNFmF-sZIWY8IHwVlPxEegSXqQyPOcyAFDzLIguxs63k0dRm-pkm4uNCN1ML-EZ1aiHL-AaqhKUPwIWFicOCQSpdJBLpr78gxOvJg/FacebookChat2.png" alt=""></a></span><br /><span></span><span></span><span></span><span><a href="https://0dvkjg.bay.livefilestore.com/y1m_G_oVS_omM5V9B4BMNTBCTjQmF-VuUJsFJwJMzgSwQxacc52a4u3FB5kaDLIDYYu_febAimRQvYIMdOVunMSF54gTfz54dRLEWf51mKePdP-FozPrzaavdkxSVL3FbZDdkLLYbW__TNwzDl7131ABQ/FacebookChat3.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1m_G_oVS_omM5V9B4BMNTBCTjQmF-VuUJsFJwJMzgSwQxacc52a4u3FB5kaDLIDYYu_febAimRQvYIMdOVunMSF54gTfz54dRLEWf51mKePdP-FozPrzaavdkxSVL3FbZDdkLLYbW__TNwzDl7131ABQ/FacebookChat3.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1m_G_oVS_omM5V9B4BMNTBCTjQmF-VuUJsFJwJMzgSwQxacc52a4u3FB5kaDLIDYYu_febAimRQvYIMdOVunMSF54gTfz54dRLEWf51mKePdP-FozPrzaavdkxSVL3FbZDdkLLYbW__TNwzDl7131ABQ/FacebookChat3.png" alt=""></a></span><br /><span></span><span>→再來就會看到壓縮裡的資料夾，請把檔案解壓縮到對應的資料夾，例如：壓縮檔開啟到「/usr/lib/purple-2/」時</span>，也要從主目錄開到「/usr/lib/purple-2/」並複製壓縮檔的所有檔案。<br /><span></span><br /><span><a href="https://0dvkjg.bay.livefilestore.com/y1m9bfEM0-KJ0k03ipzd3FohnKqEtGBqyOEa_WDPf7CH_DuVJIW3swWdU9YeRxkZY41qTnCVV954YJ1dVglDw6Wa9m5HDQ2-FUSXDQjsYGG06B7unem9U-XnSczwJrEXm-aIU6S1bnv4mwlTcEGfpsP_w/FacebookChat4.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1m9bfEM0-KJ0k03ipzd3FohnKqEtGBqyOEa_WDPf7CH_DuVJIW3swWdU9YeRxkZY41qTnCVV954YJ1dVglDw6Wa9m5HDQ2-FUSXDQjsYGG06B7unem9U-XnSczwJrEXm-aIU6S1bnv4mwlTcEGfpsP_w/FacebookChat4.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1m9bfEM0-KJ0k03ipzd3FohnKqEtGBqyOEa_WDPf7CH_DuVJIW3swWdU9YeRxkZY41qTnCVV954YJ1dVglDw6Wa9m5HDQ2-FUSXDQjsYGG06B7unem9U-XnSczwJrEXm-aIU6S1bnv4mwlTcEGfpsP_w/FacebookChat4.png" alt=""></a></span><br />這些檔案複製後就手動安裝完成了！再來就要開始玩了！<br />弄好後就把Pidgin關掉後重開→再來<span>在Pidgin新增帳號，</span><span>在「新增帳號」裡的通訊協定</span><span>應該就能看到Facebook</span>→<span>輸入帳號密碼</span>→<span>試試看能不能登入，<b>登入後要等一分鐘過後還沒斷線才算登入成功。</b><br />如果出現「伺服器停止連線」字樣的話，多試幾次或換個時間試看看。也可以在「修改帳號」裡的「進階設定」調看看</span>。<br />另外我建議不要勾選「Show history in new conversations」，照我測試結果，如果勾選可能會讓沒上線的人卻顯示為上線！<br /><span><a href="https://0dvkjg.bay.livefilestore.com/y1mMqkPvxY0DlzHNrKPLNwzZVg7jiZjVMj_nAb0qtZy7Ej9fppVXJOh0HNeL8XpQ2HxP-L1aulkE8my5Pka-fWgqGc-fkJhsrVYtYPWnzQeWN_u7UQTskBhfipppobx9kaiqZIC-bbqul4twtyeZ0GSag/1_007.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1mMqkPvxY0DlzHNrKPLNwzZVg7jiZjVMj_nAb0qtZy7Ej9fppVXJOh0HNeL8XpQ2HxP-L1aulkE8my5Pka-fWgqGc-fkJhsrVYtYPWnzQeWN_u7UQTskBhfipppobx9kaiqZIC-bbqul4twtyeZ0GSag/1_007.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1mMqkPvxY0DlzHNrKPLNwzZVg7jiZjVMj_nAb0qtZy7Ej9fppVXJOh0HNeL8XpQ2HxP-L1aulkE8my5Pka-fWgqGc-fkJhsrVYtYPWnzQeWN_u7UQTskBhfipppobx9kaiqZIC-bbqul4twtyeZ0GSag/1_007.png" alt=""></a></span></p></blockquote>
-<blockquote><p><span><a href="https://0dvkjg.bay.livefilestore.com/y1mMqkPvxY0DlzHNrKPLNwzZVg7jiZjVMj_nAb0qtZy7Ej9fppVXJOh0HNeL8XpQ2HxP-L1aulkE8my5Pka-fWgqGc-fkJhsrVYtYPWnzQeWN_u7UQTskBhfipppobx9kaiqZIC-bbqul4twtyeZ0GSag/1_007.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1mMqkPvxY0DlzHNrKPLNwzZVg7jiZjVMj_nAb0qtZy7Ej9fppVXJOh0HNeL8XpQ2HxP-L1aulkE8my5Pka-fWgqGc-fkJhsrVYtYPWnzQeWN_u7UQTskBhfipppobx9kaiqZIC-bbqul4twtyeZ0GSag/1_007.png"></a></span><span><a href="https://0dvkjg.bay.livefilestore.com/y1mj33pJR-h9H7so074aO_TKHvIU9nkYIsypO75DERAxOD2x68-zACg7D_JKyah2GRYyIVsII2G4xFsj1ku27vvwcSvE9WFfShP0hL2WDcqQ4tbd91MjthA0vudg_yAONg8uSvAXvFTgX-BFPlSlnWU_w/1_010.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1mj33pJR-h9H7so074aO_TKHvIU9nkYIsypO75DERAxOD2x68-zACg7D_JKyah2GRYyIVsII2G4xFsj1ku27vvwcSvE9WFfShP0hL2WDcqQ4tbd91MjthA0vudg_yAONg8uSvAXvFTgX-BFPlSlnWU_w/1_010.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1mj33pJR-h9H7so074aO_TKHvIU9nkYIsypO75DERAxOD2x68-zACg7D_JKyah2GRYyIVsII2G4xFsj1ku27vvwcSvE9WFfShP0hL2WDcqQ4tbd91MjthA0vudg_yAONg8uSvAXvFTgX-BFPlSlnWU_w/1_010.png" alt=""></a></span><span><a href="https://0dvkjg.bay.livefilestore.com/y1m2UKIFg59tFWKvX9el0BM8Paitm6BaUma6kYLIU1hSwFQSr-GgTMY191P6A-dgdgg1A79CtTjYgMMBaXbhyrEpbuIn0XZbMxAeHBP50hJEcpGag-LhJKXPnkKygNxqZcSFLTbC52V6tCqNeXw2PglPQ/%E4%BF%AE%E6%94%B9%E5%B8%B3%E8%99%9F_011.png" rel="WLPP;url=https://0dvkjg.bay.livefilestore.com/y1m2UKIFg59tFWKvX9el0BM8Paitm6BaUma6kYLIU1hSwFQSr-GgTMY191P6A-dgdgg1A79CtTjYgMMBaXbhyrEpbuIn0XZbMxAeHBP50hJEcpGag-LhJKXPnkKygNxqZcSFLTbC52V6tCqNeXw2PglPQ/%E4%BF%AE%E6%94%B9%E5%B8%B3%E8%99%9F_011.png"><img decoding="async" src="https://0dvkjg.bay.livefilestore.com/y1m2UKIFg59tFWKvX9el0BM8Paitm6BaUma6kYLIU1hSwFQSr-GgTMY191P6A-dgdgg1A79CtTjYgMMBaXbhyrEpbuIn0XZbMxAeHBP50hJEcpGag-LhJKXPnkKygNxqZcSFLTbC52V6tCqNeXw2PglPQ/%E4%BF%AE%E6%94%B9%E5%B8%B3%E8%99%9F_011.png" alt=""></a></span></p>
-<p>如果怎麼試都沒成功的話，可以試著更新Pidgin看看，我是更新後才成功的，我現在用的版本是<b><span>Pidgin 2.6.5</span> </b>，有關更新的方法，請自行到Pidgin官網下載，如果我有空，說不定也會寫在網誌裡。</p></blockquote>
-<p>使用微軟Windows的人：</p>
-<blockquote><p><b>我已於2月21日在Windows裡實驗過了，相關說明請參考<a href="http://yuan817.spaces.live.com/blog/cns%21A519DE06879C8B75%212071.entry">http://yuan817.spaces.live.com/blog/cns!A519DE06879C8B75!2071.entry</a></b></p></blockquote>
-<p>我自行測試後目前發現的問題</p></div>
-<div>
-<ol>
-<li><b>載入狀況實在是太不穩定</b>！有時可以上，有時一直跳出「伺服器關閉連線」的錯誤訊息</li>
-<li>在Pidgin開Facebook後，有時反而不能開Facebook網頁，有時又可以同時開，狀況很亂</li>
-<li>聊天時我方、對方竟然是開不同的視窗，像是網誌上最前面的一張圖。雖然影響不大，只是用起來不習慣</li>
-<li>我剛剛有說了，在進階設定的第一個選項建議不要勾，可能會讓好友狀況標示錯誤</li>
-</ol>
-<div>
-<hr>
-</div>
-<div><span>pidgin-facebookchat Project    <span><span><a href="http://code.google.com/p/pidgin-facebookchat/">http://code.google.com/p/pidgin-facebookchat/</a></span></span></span></div>
-<p>Pidgin官網   <a href="http://www.pidgin.im/">http://www.pidgin.im/</a></div>
-<div>參考資料：<a href="http://code.google.com/p/pidgin-facebookchat/issues/detail?id=312">http://code.google.com/p/pidgin-facebookchat/issues/detail?id=312</a></div>
-<p></p>
-]]></content:encoded>
-					
-					<wfw:commentRss>//blog-legacy.yuaner.tw/old/pidgin%e6%95%b4%e5%90%88%e5%8d%b3%e6%99%82%e9%80%9a%e8%88%87facebook%e8%81%8a%e5%a4%a9%e5%8a%9f%e8%83%bd%e6%95%b4%e5%90%88%ef%bc%81/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
