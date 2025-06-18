@@ -187,13 +187,17 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
     </header>
 
     <div class="site-primary">
-
+<script src="/path/to/disqus-config.js"></script>
 <script>
-/* disqus_config v13 */
-var disqus_config = function () {
-  this.page.url = "/old/miui-2-3-30-for-htc-desire-hd-%e5%88%b7%e6%a9%9f%e5%be%8c%e8%a9%a6%e7%8e%a9%e5%bf%83%e5%be%97/";
-  this.page.identifier = "44";
-};
+  const protocol = "https:";
+  const slashes = "//";
+  const domain = "blog-legacy-wp.yuaner.tw";
+  const path = "/old/miui-2-3-30-for-htc-desire-hd-%e5%88%b7%e6%a9%9f%e5%be%8c%e8%a9%a6%e7%8e%a9%e5%bf%83%e5%be%97/";
+  const pageUrl = protocol + slashes + domain + path;
+
+  const pageId = "44";
+
+  loadDisqusConfig(pageUrl, pageId);
 </script>
 <div class="site-content sidebar-right">
   <div class="vs-container">

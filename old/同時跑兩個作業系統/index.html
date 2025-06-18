@@ -187,13 +187,17 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
     </header>
 
     <div class="site-primary">
-
+<script src="/path/to/disqus-config.js"></script>
 <script>
-/* disqus_config v13 */
-var disqus_config = function () {
-  this.page.url = "/old/%e5%90%8c%e6%99%82%e8%b7%91%e5%85%a9%e5%80%8b%e4%bd%9c%e6%a5%ad%e7%b3%bb%e7%b5%b1/";
-  this.page.identifier = "197";
-};
+  const protocol = "https:";
+  const slashes = "//";
+  const domain = "blog-legacy-wp.yuaner.tw";
+  const path = "/old/%e5%90%8c%e6%99%82%e8%b7%91%e5%85%a9%e5%80%8b%e4%bd%9c%e6%a5%ad%e7%b3%bb%e7%b5%b1/";
+  const pageUrl = protocol + slashes + domain + path;
+
+  const pageId = "197";
+
+  loadDisqusConfig(pageUrl, pageId);
 </script>
 <div class="site-content sidebar-right">
   <div class="vs-container">
