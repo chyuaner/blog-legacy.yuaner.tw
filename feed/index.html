@@ -8,11 +8,11 @@
 	>
 
 <channel>
-	<title>元兒～ 技術筆記</title>
-	<atom:link href="/feed/" rel="self" type="application/rss+xml" />
-	<link>/</link>
-	<description></description>
-	<lastBuildDate>Sun, 08 Jun 2025 08:31:13 +0000</lastBuildDate>
+	<title>元兒～ 技術筆記（舊站）</title>
+	<atom:link href="//blog-legacy.yuaner.tw/feed/" rel="self" type="application/rss+xml" />
+	<link>//blog-legacy.yuaner.tw/</link>
+	<description>本站不再維護更新，新內容請移駕去新站</description>
+	<lastBuildDate>Wed, 18 Jun 2025 16:45:31 +0000</lastBuildDate>
 	<language>zh-TW</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -21,16 +21,169 @@
 	<generator>https://wordpress.org/?v=6.8.1</generator>
 
 <image>
-	<url>/wp-content/uploads/2022/09/pc-programming-icon-150x150.png</url>
-	<title>元兒～ 技術筆記</title>
-	<link>/</link>
+	<url>//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/pc-programming-icon-150x150.png</url>
+	<title>元兒～ 技術筆記（舊站）</title>
+	<link>//blog-legacy.yuaner.tw/</link>
 	<width>32</width>
 	<height>32</height>
 </image> 
 	<item>
+		<title>處理WordPress經過Cloudflare的https對應</title>
+		<link>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/</link>
+					<comments>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/#respond</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2025 16:45:31 +0000</pubDate>
+				<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[資訊技術]]></category>
+		<category><![CDATA[cloudflare]]></category>
+		<category><![CDATA[wordpress]]></category>
+		<guid isPermaLink="false">//blog-legacy.yuaner.tw/?p=886</guid>
+
+					<description><![CDATA[這應該是倒數第二篇了吧，想不到為了裝靜態化要用的Plugin，結果被逼要先升級系統，然後在升級系統的過程中又遇到對外線路有問題，在處理的時候就乾脆來寫經驗心得文做個紀錄。 我這邊的主機線路是：對外網 &#8212; Cloudflare &#8212; Reverse Proxy &#8212; WordPress Cloudflare設定的地方在 Dashboard→「SSL/TLS」→「概觀」&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>這應該是倒數第二篇了吧，想不到為了裝靜態化要用的Plugin，結果被逼要先升級系統，然後在升級系統的過程中又遇到對外線路有問題，在處理的時候就乾脆來寫經驗心得文做個紀錄。</p>
+
+
+
+<p>我這邊的主機線路是：<br>對外網 &#8212; Cloudflare &#8212; Reverse Proxy &#8212; WordPress</p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">Cloudflare設定的地方在</h2>
+
+
+
+<p>Dashboard→「SSL/TLS」→「概觀」→「自訂SSL/TLS」那邊</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="712" height="1024" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png" alt="" class="wp-image-889" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png 712w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-209x300.png 209w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-768x1104.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-1068x1536.png 1068w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account.png 1334w" sizes="(max-width: 712px) 100vw, 712px" /></figure>
+
+
+
+<h2 class="wp-block-heading">一個解法：Cloudflare走flexable模式</h2>
+
+
+
+<p>好處：簡單方便 缺點：是強制主機送https超連結，主機自身自己不知道有https，容易造成線路混亂。</p>
+
+
+
+<p>我的網路線路就是：</p>
+
+
+<figure class="wp-block-table">
+<table class="has-fixed-layout">
+<tbody>
+<tr>
+<td class="has-text-align-center" colspan="2" data-align="center">對外網</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Cloudflare</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Reverse Proxy</td>
+<td class="has-text-align-center" colspan="2" data-align="center">WordPress</td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"> </td>
+<td class="has-text-align-center has-light-green-cyan-background-color has-background" colspan="2" data-align="center">http 443</td>
+<td class="has-text-align-center has-luminous-vivid-amber-background-color has-background" colspan="4" data-align="center">http 80</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+<p>WordPress主機視角: 全程都是http，不知道自己是https</p>
+
+
+
+<p>從Cloudflare到Worepress這段走80純http，但是對外到Cloudflare這邊走https。<br>因為Wordpress自己不知道是走https，所以由Wordpress輸出的所有連結都會是http，必須手動改設定強制都送https超連結。</p>
+
+
+
+<p>改wp-config.php 強制開 HTTPS：</p>
+
+
+
+<pre class="wp-block-code"><code>$_SERVER&#091;&#039;HTTPS&#039;] = &#039;on&#039;;</code></pre>
+
+
+
+<h2 class="wp-block-heading">另一個解法：Cloudflare走full模式（我最後採用的方案 ）</h2>
+
+
+
+<p>缺點：設定麻煩一些 好處：可以讓目標主機知道</p>
+
+
+
+<p>我的網路線路就是：</p>
+
+
+<figure class="wp-block-table">
+<table class="has-fixed-layout">
+<tbody>
+<tr>
+<td class="has-text-align-center" colspan="2" data-align="center">對外網</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Cloudflare</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Reverse Proxy</td>
+<td class="has-text-align-center" colspan="2" data-align="center">WordPress</td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"> </td>
+<td class="has-text-align-center has-light-green-cyan-background-color has-background" style="text-align: center;" colspan="4" data-align="center">http 443</td>
+<td class="has-text-align-center has-luminous-vivid-amber-background-color has-background" colspan="2" data-align="center">http 80</td>
+<td class="has-text-align-center" data-align="center"> </td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+<p>WordPress主機視角: 雖然傳輸是http，但可以從封包header知道現在是https</p>
+
+
+
+<p>然後Reverse Proxy這層要加入以下內容，讓可以識別是不是https的header能正確傳給Wordpress那邊：</p>
+
+
+
+<pre class="wp-block-code"><code>proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-For $remote_addr;
+proxy_set_header Host $host;</code></pre>
+
+
+
+<p>wp-config.php</p>
+
+
+
+<pre class="wp-block-code"><code>if (isset($_SERVER&#091;&#039;HTTP_X_FORWARDED_PROTO&#039;]) &amp;&amp; $_SERVER&#091;&#039;HTTP_X_FORWARDED_PROTO&#039;] === &#039;https&#039;) {
+    $_SERVER&#091;&#039;HTTPS&#039;] = &#039;on&#039;;
+}</code></pre>
+
+
+
+<p>本來想說這篇寫在新站，不過想想是和Wordpress有關，所以還是先當作這裡Wordpress舊站的倒數兩篇吧～</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>部落格系統準備遷移</title>
-		<link>/other/move-to-new-blog-system/</link>
-					<comments>/other/move-to-new-blog-system/#respond</comments>
+		<link>//blog-legacy.yuaner.tw/other/move-to-new-blog-system/</link>
+					<comments>//blog-legacy.yuaner.tw/other/move-to-new-blog-system/#respond</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Sun, 08 Jun 2025 08:29:43 +0000</pubDate>
@@ -90,15 +243,15 @@
 <p>新系統要用哪套還在評估中，之後心得經驗會直接在新系統上發表，就醬。</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/other/move-to-new-blog-system/feed/</wfw:commentRss>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/other/move-to-new-blog-system/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>淘寶退款與後續要怎麼領到這些錢</title>
-		<link>/life/taobao-refund/</link>
-					<comments>/life/taobao-refund/#comments</comments>
+		<link>//blog-legacy.yuaner.tw/life/taobao-refund/</link>
+					<comments>//blog-legacy.yuaner.tw/life/taobao-refund/#comments</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Sun, 25 Sep 2022 17:43:49 +0000</pubDate>
@@ -131,7 +284,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="980" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-980x1024.png" alt="" class="wp-image-828" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-980x1024.png 980w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-287x300.png 287w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-768x802.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-1470x1536.png 1470w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-1960x2048.png 1960w" sizes="(max-width: 980px) 100vw, 980px" /><figcaption>退款原因我本來想寫「賣家不出貨」，但是想一想遇上疫情這種鳥事也不是賣家願意的，想說不要為難賣家就把退款原因寫好聽一點好了。</figcaption></figure>
+<figure class="wp-block-image size-large"><img decoding="async" width="980" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-980x1024.png" alt="" class="wp-image-828" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-980x1024.png 980w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-287x300.png 287w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-768x802.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-1470x1536.png 1470w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-03-51-退款详情-1960x2048.png 1960w" sizes="(max-width: 980px) 100vw, 980px" /><figcaption>退款原因我本來想寫「賣家不出貨」，但是想一想遇上疫情這種鳥事也不是賣家願意的，想說不要為難賣家就把退款原因寫好聽一點好了。</figcaption></figure>
 
 
 
@@ -147,7 +300,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="631" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-1024x631.png" alt="" class="wp-image-826" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-1024x631.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-300x185.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-768x473.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-1536x947.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-2048x1262.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="631" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-1024x631.png" alt="" class="wp-image-826" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-1024x631.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-300x185.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-768x473.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-1536x947.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-06-19-使用玉山银行ATM转账付款，退款会退到哪里呢-天猫淘宝海外-2022年9月-2048x1262.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -183,7 +336,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="505" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-1024x505.png" alt="" class="wp-image-827" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-1024x505.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-300x148.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-768x379.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-1536x757.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-2048x1009.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="505" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-1024x505.png" alt="" class="wp-image-827" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-1024x505.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-300x148.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-768x379.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-1536x757.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-37-24-帳戶總覽-2048x1009.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -199,7 +352,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="846" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-1024x846.png" alt="" class="wp-image-838" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-1024x846.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-300x248.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-768x635.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-1536x1270.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-2048x1693.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="846" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-1024x846.png" alt="" class="wp-image-838" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-1024x846.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-300x248.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-768x635.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-1536x1270.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-26-at-00-58-31-線上開戶-玉山銀行-2048x1693.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -224,20 +377,20 @@
 
 
 <figure class="wp-block-gallery has-nested-images columns-1 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
-<figure class="wp-block-image size-large is-style-default"><img loading="lazy" decoding="async" width="1024" height="540" data-id="837" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-1024x540.png" alt="" class="wp-image-837" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-1024x540.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-300x158.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-768x405.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-1536x810.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large is-style-default"><img loading="lazy" decoding="async" width="1024" height="540" data-id="837" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-1024x540.png" alt="" class="wp-image-837" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-1024x540.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-300x158.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-768x405.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-1536x810.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-38-41-帳戶資訊c-1-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="3376" height="1780" data-id="831" src="http://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c.png" alt="" class="wp-image-831" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c.png 3376w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-300x158.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-1024x540.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-768x405.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-1536x810.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-2048x1080.png 2048w" sizes="auto, (max-width: 3376px) 100vw, 3376px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="3376" height="1780" data-id="831" src="http://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c.png" alt="" class="wp-image-831" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c.png 3376w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-300x158.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-1024x540.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-768x405.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-1536x810.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-17-提領帳戶設定c-2048x1080.png 2048w" sizes="auto, (max-width: 3376px) 100vw, 3376px" /></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="3376" height="1780" data-id="832" src="http://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c.png" alt="" class="wp-image-832" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c.png 3376w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-300x158.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-1024x540.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-768x405.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-1536x810.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-2048x1080.png 2048w" sizes="auto, (max-width: 3376px) 100vw, 3376px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="3376" height="1780" data-id="832" src="http://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c.png" alt="" class="wp-image-832" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c.png 3376w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-300x158.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-1024x540.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-768x405.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-1536x810.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-30-提領帳戶設定c-2048x1080.png 2048w" sizes="auto, (max-width: 3376px) 100vw, 3376px" /></figure>
 </figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-1024x540.png" alt="" class="wp-image-839" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-1024x540.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-300x158.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-768x405.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-1536x810.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>最後在「提領帳戶設定」可以看到我剛剛綁好的戶頭</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-1024x540.png" alt="" class="wp-image-839" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-1024x540.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-300x158.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-768x405.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-1536x810.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-39-58-提領帳戶設定c-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>最後在「提領帳戶設定」可以看到我剛剛綁好的戶頭</figcaption></figure>
 
 
 
@@ -250,15 +403,15 @@
 
 
 <figure class="wp-block-gallery has-nested-images columns-1 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" data-id="833" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-1024x540.png" alt="" class="wp-image-833" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-1024x540.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-300x158.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-768x405.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-1536x810.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" data-id="833" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-1024x540.png" alt="" class="wp-image-833" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-1024x540.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-300x158.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-768x405.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-1536x810.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-49-ECPayc-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" data-id="835" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-1024x540.png" alt="" class="wp-image-835" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-1024x540.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-300x158.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-768x405.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-1536x810.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>提領到玉山帳戶的話就不用被收手續費了</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" data-id="835" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-1024x540.png" alt="" class="wp-image-835" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-1024x540.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-300x158.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-768x405.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-1536x810.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-40-59-ECPayc-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>提領到玉山帳戶的話就不用被收手續費了</figcaption></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" data-id="834" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-1024x540.png" alt="" class="wp-image-834" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-1024x540.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-300x158.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-768x405.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-1536x810.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="540" data-id="834" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-1024x540.png" alt="" class="wp-image-834" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-1024x540.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-300x158.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-768x405.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-1536x810.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-25-at-23-41-08-ECPayc-2048x1080.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 </figure>
 
 
@@ -267,22 +420,22 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="439" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-439x1024.png" alt="" class="wp-image-844" srcset="/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-439x1024.png 439w, /wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-129x300.png 129w, /wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-768x1792.png 768w, /wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-658x1536.png 658w, /wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-878x2048.png 878w, /wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881.png 1080w" sizes="auto, (max-width: 439px) 100vw, 439px" /><figcaption>最後就會看到「電子支付提款」這筆錢了</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="439" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-439x1024.png" alt="" class="wp-image-844" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-439x1024.png 439w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-129x300.png 129w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-768x1792.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-658x1536.png 658w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881-878x2048.png 878w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image_editor_output_image180942094-1664127663881.png 1080w" sizes="auto, (max-width: 439px) 100vw, 439px" /><figcaption>最後就會看到「電子支付提款」這筆錢了</figcaption></figure>
 
 
 
 <p></p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/life/taobao-refund/feed/</wfw:commentRss>
-			<slash:comments>1</slash:comments>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/life/taobao-refund/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>iPad更換電池送修經驗</title>
-		<link>/other/ipad-repair-exp/</link>
-					<comments>/other/ipad-repair-exp/#respond</comments>
+		<link>//blog-legacy.yuaner.tw/other/ipad-repair-exp/</link>
+					<comments>//blog-legacy.yuaner.tw/other/ipad-repair-exp/#respond</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Sat, 17 Sep 2022 10:16:42 +0000</pubDate>
@@ -303,7 +456,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="715" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/image.jpg" alt="" class="wp-image-796" srcset="/wp-content/uploads/2022/09/image.jpg 1024w, /wp-content/uploads/2022/09/image-300x209.jpg 300w, /wp-content/uploads/2022/09/image-768x536.jpg 768w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="715" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/image.jpg" alt="" class="wp-image-796" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image.jpg 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image-300x209.jpg 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/image-768x536.jpg 768w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -315,7 +468,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="786" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-1024x786.png" alt="" class="wp-image-799" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-1024x786.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-300x230.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-768x589.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-1536x1178.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-2048x1571.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="786" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-1024x786.png" alt="" class="wp-image-799" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-1024x786.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-300x230.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-768x589.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-1536x1178.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-05-24-服務和支援保固狀態-Apple-支援-1-2048x1571.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -351,7 +504,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="734" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-734x1024.png" alt="" class="wp-image-800" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-734x1024.png 734w, /wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-215x300.png 215w, /wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-768x1072.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-1101x1536.png 1101w, /wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-1467x2048.png 1467w, /wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣.png 1582w" sizes="auto, (max-width: 734px) 100vw, 734px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="734" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-734x1024.png" alt="" class="wp-image-800" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-734x1024.png 734w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-215x300.png 215w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-768x1072.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-1101x1536.png 1101w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣-1467x2048.png 1467w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-16-at-21-23-30-iPad-服務和維修-Apple-支持-台灣.png 1582w" sizes="auto, (max-width: 734px) 100vw, 734px" /></figure>
 
 
 
@@ -387,26 +540,26 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="439" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-439x1024.png" alt="" class="wp-image-808" srcset="/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-439x1024.png 439w, /wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-129x300.png 129w, /wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-768x1792.png 768w, /wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-658x1536.png 658w, /wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-878x2048.png 878w, /wp-content/uploads/2022/09/Point-Blur_Sep172022_181418.png 1080w" sizes="auto, (max-width: 439px) 100vw, 439px" /><figcaption>某家報價2500元</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="439" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-439x1024.png" alt="" class="wp-image-808" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-439x1024.png 439w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-129x300.png 129w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-768x1792.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-658x1536.png 658w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418-878x2048.png 878w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Point-Blur_Sep172022_181418.png 1080w" sizes="auto, (max-width: 439px) 100vw, 439px" /><figcaption>某家報價2500元</figcaption></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="531" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-1024x531.png" alt="" class="wp-image-805" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-1024x531.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-300x155.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-768x398.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-1536x796.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-2048x1061.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>某家換副廠電池公開報價3090元副廠電池</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="531" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-1024x531.png" alt="" class="wp-image-805" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-1024x531.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-300x155.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-768x398.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-1536x796.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-17-43-54c-2048x1061.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>某家換副廠電池公開報價3090元副廠電池</figcaption></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="418" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-418x1024.png" alt="" class="wp-image-806" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-418x1024.png 418w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-123x300.png 123w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-768x1881.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-627x1536.png 627w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-836x2048.png 836w, /wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c.png 1023w" sizes="auto, (max-width: 418px) 100vw, 418px" /><figcaption>某家公開報價3590元副廠電池</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="418" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-418x1024.png" alt="" class="wp-image-806" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-418x1024.png 418w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-123x300.png 123w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-768x1881.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-627x1536.png 627w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c-836x2048.png 836w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-17-at-18-09-23c.png 1023w" sizes="auto, (max-width: 418px) 100vw, 418px" /><figcaption>某家公開報價3590元副廠電池</figcaption></figure>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/other/ipad-repair-exp/feed/</wfw:commentRss>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/other/ipad-repair-exp/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>給tw域名換一家域名商吧</title>
-		<link>/tech/twdomaintrans/</link>
-					<comments>/tech/twdomaintrans/#respond</comments>
+		<link>//blog-legacy.yuaner.tw/tech/twdomaintrans/</link>
+					<comments>//blog-legacy.yuaner.tw/tech/twdomaintrans/#respond</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Mon, 12 Sep 2022 15:56:46 +0000</pubDate>
@@ -459,7 +612,7 @@
 
 
 
-<figure class="wp-block-image size-large is-resized"><img loading="lazy" decoding="async" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x468.png" alt="" class="wp-image-763" width="670" height="306" srcset="/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x468.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-300x137.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-768x351.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1536x702.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-2048x936.png 2048w" sizes="auto, (max-width: 670px) 100vw, 670px" /><figcaption>轉出進行中的時候的管理界面</figcaption></figure>
+<figure class="wp-block-image size-large is-resized"><img loading="lazy" decoding="async" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x468.png" alt="" class="wp-image-763" width="670" height="306" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x468.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-300x137.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-768x351.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1536x702.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-18-34-58-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-2048x936.png 2048w" sizes="auto, (max-width: 670px) 100vw, 670px" /><figcaption>轉出進行中的時候的管理界面</figcaption></figure>
 
 
 
@@ -483,7 +636,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="638" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-1024x638.png" alt="" class="wp-image-766" srcset="/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-1024x638.png 1024w, /wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-300x187.png 300w, /wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-768x478.png 768w, /wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-1536x957.png 1536w, /wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-2048x1275.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>最後會收到舊域名商給的轉出密碼</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="638" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-1024x638.png" alt="" class="wp-image-766" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-1024x638.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-300x187.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-768x478.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-1536x957.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_175757c-1-2048x1275.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>最後會收到舊域名商給的轉出密碼</figcaption></figure>
 
 
 
@@ -507,11 +660,11 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="721" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-1024x721.png" alt="" class="wp-image-768" srcset="/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-1024x721.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-300x211.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-768x541.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-1536x1082.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1.png 1682w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>Gandi購物車界面（移轉不能選「持續時間」）</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="721" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-1024x721.png" alt="" class="wp-image-768" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-1024x721.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-300x211.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-768x541.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1-1536x1082.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-15-32-28-移轉您的域名-Gandi.net-c-1.png 1682w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>Gandi購物車界面（移轉不能選「持續時間」）</figcaption></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="548" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-1024x548.png" alt="" class="wp-image-769" srcset="/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-1024x548.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-300x161.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-768x411.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c.png 1125w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>鼎嘉購物車界面（轉入也只能先1年）</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="548" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-1024x548.png" alt="" class="wp-image-769" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-1024x548.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-300x161.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c-768x411.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-08-31-at-16-04-44-購物車-鼎嘉數位有限公司c.png 1125w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>鼎嘉購物車界面（轉入也只能先1年）</figcaption></figure>
 
 
 
@@ -615,7 +768,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="762" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-762x1024.png" alt="" class="wp-image-771" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-762x1024.png 762w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-223x300.png 223w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-768x1033.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-1142x1536.png 1142w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-1523x2048.png 1523w" sizes="auto, (max-width: 762px) 100vw, 762px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="762" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-762x1024.png" alt="" class="wp-image-771" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-762x1024.png 762w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-223x300.png 223w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-768x1033.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-1142x1536.png 1142w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-08-11-移轉您的域名-Gandi.netc_-1523x2048.png 1523w" sizes="auto, (max-width: 762px) 100vw, 762px" /></figure>
 
 
 
@@ -623,7 +776,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="757" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-1024x757.png" alt="" class="wp-image-774" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-1024x757.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-300x222.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-768x568.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-1536x1136.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-2048x1515.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="757" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-1024x757.png" alt="" class="wp-image-774" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-1024x757.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-300x222.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-768x568.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-1536x1136.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-10-37-您的域名-Gandi.netc_-2048x1515.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -631,11 +784,11 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="911" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_182408c-1024x911.png" alt="" class="wp-image-776" srcset="/wp-content/uploads/2022/09/Screenshot_20220912_182408c-1024x911.png 1024w, /wp-content/uploads/2022/09/Screenshot_20220912_182408c-300x267.png 300w, /wp-content/uploads/2022/09/Screenshot_20220912_182408c-768x683.png 768w, /wp-content/uploads/2022/09/Screenshot_20220912_182408c-1536x1366.png 1536w, /wp-content/uploads/2022/09/Screenshot_20220912_182408c-2048x1821.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="911" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_182408c-1024x911.png" alt="" class="wp-image-776" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_182408c-1024x911.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_182408c-300x267.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_182408c-768x683.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_182408c-1536x1366.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_182408c-2048x1821.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="450" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-1024x450.png" alt="" class="wp-image-777" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-1024x450.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-300x132.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-768x338.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-1536x675.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-2048x900.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>從信件點選連結之後，會進入確認頁面</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="450" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-1024x450.png" alt="" class="wp-image-777" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-1024x450.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-300x132.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-768x338.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-1536x675.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-02-at-21-14-01-確認-1-2048x900.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>從信件點選連結之後，會進入確認頁面</figcaption></figure>
 
 
 
@@ -655,11 +808,11 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="977" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_213721c-977x1024.png" alt="" class="wp-image-779" srcset="/wp-content/uploads/2022/09/Screenshot_20220912_213721c-977x1024.png 977w, /wp-content/uploads/2022/09/Screenshot_20220912_213721c-286x300.png 286w, /wp-content/uploads/2022/09/Screenshot_20220912_213721c-768x805.png 768w, /wp-content/uploads/2022/09/Screenshot_20220912_213721c.png 1370w" sizes="auto, (max-width: 977px) 100vw, 977px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="977" height="1024" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_213721c-977x1024.png" alt="" class="wp-image-779" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_213721c-977x1024.png 977w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_213721c-286x300.png 286w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_213721c-768x805.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot_20220912_213721c.png 1370w" sizes="auto, (max-width: 977px) 100vw, 977px" /></figure>
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="454" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-1024x454.png" alt="" class="wp-image-778" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-1024x454.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-300x133.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-768x340.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-1536x680.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-2048x907.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="454" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-1024x454.png" alt="" class="wp-image-778" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-1024x454.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-300x133.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-768x340.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-1536x680.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-36-49-您的域名-Gandi.net_-2048x907.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -667,7 +820,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="643" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-1024x643.png" alt="" class="wp-image-780" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-1024x643.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-300x188.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-768x482.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-1536x964.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-2048x1285.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="643" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-1024x643.png" alt="" class="wp-image-780" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-1024x643.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-300x188.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-768x482.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-1536x964.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-08-您的域名-Gandi.net_-2048x1285.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -679,7 +832,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="643" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-1024x643.png" alt="" class="wp-image-781" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-1024x643.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-300x188.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-768x482.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-1536x964.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-2048x1285.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="643" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-1024x643.png" alt="" class="wp-image-781" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-1024x643.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-300x188.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-768x482.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-1536x964.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-18-38-23-您的域名-Gandi.net_-2048x1285.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
 
 
 
@@ -687,18 +840,18 @@
 
 
 
-<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="422" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x422.png" alt="" class="wp-image-782" srcset="/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x422.png 1024w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-300x124.png 300w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-768x317.png 768w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1536x633.png 1536w, /wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-2048x844.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>轉移完成之後，原有PChome那邊就消失了！</figcaption></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="422" src="https://blog.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x422.png" alt="" class="wp-image-782" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1024x422.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-300x124.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-768x317.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-1536x633.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2022/09/Screenshot-2022-09-12-at-23-53-45-PChome-Online-網路家庭-買網址-網域名稱申請與查詢註冊-免費轉址-免費DNS代管-Domain-Name-Registration-2048x844.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><figcaption>轉移完成之後，原有PChome那邊就消失了！</figcaption></figure>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/tech/twdomaintrans/feed/</wfw:commentRss>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/tech/twdomaintrans/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>KBtalKing Pro Value 我人生中的第一把機械式鍵盤</title>
-		<link>/tech/kbtalking-pro-value/</link>
-					<comments>/tech/kbtalking-pro-value/#respond</comments>
+		<link>//blog-legacy.yuaner.tw/tech/kbtalking-pro-value/</link>
+					<comments>//blog-legacy.yuaner.tw/tech/kbtalking-pro-value/#respond</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Tue, 10 Sep 2013 14:00:32 +0000</pubDate>
@@ -786,15 +939,15 @@
 </ul>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/tech/kbtalking-pro-value/feed/</wfw:commentRss>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/tech/kbtalking-pro-value/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>MIUI V5 合作版 For Desire HD 簡單心得</title>
-		<link>/tech/miui-v5-for-desire-hd/</link>
-					<comments>/tech/miui-v5-for-desire-hd/#respond</comments>
+		<link>//blog-legacy.yuaner.tw/tech/miui-v5-for-desire-hd/</link>
+					<comments>//blog-legacy.yuaner.tw/tech/miui-v5-for-desire-hd/#respond</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Sat, 27 Jul 2013 15:10:22 +0000</pubDate>
@@ -873,15 +1026,15 @@
 </ul>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/tech/miui-v5-for-desire-hd/feed/</wfw:commentRss>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/tech/miui-v5-for-desire-hd/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>[Android] SAO刀劍神域桌面美化</title>
-		<link>/old/android-sao-desktop/</link>
-					<comments>/old/android-sao-desktop/#comments</comments>
+		<link>//blog-legacy.yuaner.tw/old/android-sao-desktop/</link>
+					<comments>//blog-legacy.yuaner.tw/old/android-sao-desktop/#comments</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Sat, 13 Jul 2013 08:48:36 +0000</pubDate>
@@ -894,22 +1047,22 @@
 <h3><a title="刀劍神域桌面小工具" href="https://play.google.com/store/apps/details?id=sono.apps.saobarwidget&amp;feature=search_result" data-a="1" data-c="1">刀劍神域桌面小工具</a></h3>
 <p><a href="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-23-16-23-13-1.png"><img loading="lazy" decoding="async" class="aligncenter" alt="Screenshot_2013-06-23-16-23-13" src="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-23-16-23-13-1.png" width="288" height="480" /></a><span id="more-400"></span></p>
 <h3><a title="SAO Call Log" href="https://play.google.com/store/apps/details?id=com.gamedom.saocalllog&amp;feature=search_result" data-a="1" data-c="1">SAO Call Log</a></h3>
-<p><a href="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1.png"><img loading="lazy" decoding="async" class="alignnone  wp-image-404" alt="Screenshot_2013-07-13-16-26-52(c)" src="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1.png" width="288" height="480" srcset="/wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1.png 480w, /wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
+<p><a href="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1.png"><img loading="lazy" decoding="async" class="alignnone  wp-image-404" alt="Screenshot_2013-07-13-16-26-52(c)" src="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1.png" width="288" height="480" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1.png 480w, //blog-legacy.yuaner.tw/wp-content/uploads/2013/07/Screenshot_2013-07-13-16-26-52c-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
 <p>嘛&#8230;就是通話紀錄啦～不過在這一筆資料上按一下，就會有三個按鈕：回撥、傳簡訊、返回．</p>
 <h3><a title="刀剑神域 信息" href="https://play.google.com/store/apps/details?id=com.gamedom.saomessaging&amp;feature=search_result" data-a="1" data-c="1">刀剑神域 信息</a></h3>
-<p><a href="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-02c-1.png"><img loading="lazy" decoding="async" alt="Screenshot_2013-06-28-13-06-02(c)" src="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-02c-1.png" width="288" height="480" /></a><a href="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1.png"><img loading="lazy" decoding="async" class="alignnone  wp-image-403" alt="Screenshot_2013-06-28-13-06-12(c)" src="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1.png" width="288" height="480" srcset="/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1.png 480w, /wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
+<p><a href="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-02c-1.png"><img loading="lazy" decoding="async" alt="Screenshot_2013-06-28-13-06-02(c)" src="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-02c-1.png" width="288" height="480" /></a><a href="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1.png"><img loading="lazy" decoding="async" class="alignnone  wp-image-403" alt="Screenshot_2013-06-28-13-06-12(c)" src="https://192.168.49.41/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1.png" width="288" height="480" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1.png 480w, //blog-legacy.yuaner.tw/wp-content/uploads/2013/07/Screenshot_2013-06-28-13-06-12c-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
 <p>安裝以後其實基本上沒什麼功能，頂多只能看到設定選項那樣，主要是當有人傳簡訊給你的時候，才會看到上面的畫面．當在SAO簡訊畫面點一下，還可以當場回覆簡訊喔。至於桌布嘛&#8230;我就很隨便的找一張了，圖片上的是從<a href="http://lovetabris.pixnet.net/blog/post/30933802-%E5%88%80%E5%8A%8D%E7%A5%9E%E5%9F%9F-sword-art-online-%E5%8B%95%E7%95%AB" target="_blank">腐宅日常生活</a>那邊抓來的&#8230;</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/old/android-sao-desktop/feed/</wfw:commentRss>
-			<slash:comments>2</slash:comments>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/old/android-sao-desktop/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>PACman v22.3.0 for HTC Desire HD 我又刷啦</title>
-		<link>/old/pacman-v22-3-dhd/</link>
-					<comments>/old/pacman-v22-3-dhd/#comments</comments>
+		<link>//blog-legacy.yuaner.tw/old/pacman-v22-3-dhd/</link>
+					<comments>//blog-legacy.yuaner.tw/old/pacman-v22-3-dhd/#comments</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Fri, 07 Jun 2013 08:19:12 +0000</pubDate>
@@ -921,9 +1074,9 @@
 
 					<description><![CDATA[因為最近看到我同學拿Google GALAXY Nexus手機，看著原生最新的Android 4.2系統的樣子，讓我蠻心動的（因為我大都是使用搭配HTC Sense的Rom）。在今天心血來潮下，找了以最新原生的Android為基礎來加料的版本（雖說是想用原生看看，不過既然要刷的話，當然要找加料多點的版本才能滿足我貪新的慾望啦XD）。 刷了以後第一件事當然就是看系統資訊啦，嗯&#8230;的確是最新&#8230;]]></description>
 										<content:encoded><![CDATA[<p>因為最近看到我同學拿<a href="http://www.sogi.com.tw/Product/productInfo.aspx?pno=8699" target="_blank">Google GALAXY Nexus</a>手機，看著原生最新的Android 4.2系統的樣子，讓我蠻心動的（因為我大都是使用搭配HTC Sense的Rom）。在今天心血來潮下，找了以最新原生的Android為基礎來加料的版本（雖說是想用原生看看，不過既然要刷的話，當然要找加料多點的版本才能滿足我貪新的慾望啦XD）<em>。</em></p>
-<p style="text-align: center;"><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1.png"><img loading="lazy" decoding="async" class=" wp-image-349 aligncenter" alt="Screenshot_2013-06-06-22-27-31" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1.png" width="336" height="560" srcset="/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1.png 480w, /wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1-180x300.png 180w" sizes="auto, (max-width: 336px) 100vw, 336px" /></a></p>
+<p style="text-align: center;"><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1.png"><img loading="lazy" decoding="async" class=" wp-image-349 aligncenter" alt="Screenshot_2013-06-06-22-27-31" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1.png" width="336" height="560" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1.png 480w, //blog-legacy.yuaner.tw/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-27-31-1-180x300.png 180w" sizes="auto, (max-width: 336px) 100vw, 336px" /></a></p>
 <p><span id="more-347"></span>刷了以後第一件事當然就是看系統資訊啦，嗯&#8230;的確是最新的Android 4.2.2</p>
-<p><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1.png"><img loading="lazy" decoding="async" class="wp-image-351 aligncenter" alt="Screenshot_2013-06-06-23-01-16" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1.png" width="288" height="480" srcset="/wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1.png 480w, /wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
+<p><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1.png"><img loading="lazy" decoding="async" class="wp-image-351 aligncenter" alt="Screenshot_2013-06-06-23-01-16" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1.png" width="288" height="480" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1.png 480w, //blog-legacy.yuaner.tw/wp-content/uploads/2013/06/Screenshot_2013-06-06-23-01-16-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
 <p>既然想體驗原生介面，當然就要有原生的樣子啦</p>
 <p><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-28-59-1.png"><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-352" alt="Screenshot_2013-06-06-22-28-59" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-28-59-180x300.png" width="180" height="300" /></a><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-29-44-1.png"> <img loading="lazy" decoding="async" class="alignnone size-medium wp-image-353" alt="Screenshot_2013-06-06-22-29-44" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-29-44-180x300.png" width="180" height="300" /> </a><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-34-59-1.png"><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-354" alt="Screenshot_2013-06-06-22-34-59" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-06-22-34-59-180x300.png" width="180" height="300" /></a></p>
 <p>設定畫面&#8230;嗯&#8230;的確集合了三家的特色選項啦</p>
@@ -967,7 +1120,7 @@
 </ul>
 <h2>刷機之後我會做的事</h2>
 <h3>關閉3G數據通訊</h3>
-<p><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1.png"><img loading="lazy" decoding="async" class="wp-image-390 aligncenter" alt="Screenshot_2013-06-07-02-45-46" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1.png" width="288" height="480" srcset="/wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1.png 480w, /wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
+<p><a href="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1.png"><img loading="lazy" decoding="async" class="wp-image-390 aligncenter" alt="Screenshot_2013-06-07-02-45-46" src="https://192.168.49.41/wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1.png" width="288" height="480" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1.png 480w, //blog-legacy.yuaner.tw/wp-content/uploads/2013/06/Screenshot_2013-06-07-02-45-46-1-180x300.png 180w" sizes="auto, (max-width: 288px) 100vw, 288px" /></a></p>
 <p>像我這位沒錢搞上網方案的人，請一定要先關閉3G數據通訊，不然下個月的帳單會令人想吐喔&#8230;&#8230;</p>
 <p>按下MENU鍵→&#8221;系統設定&#8221;→在&#8221;無線與網路&#8221;那邊選擇&#8221;更多內容&#8221;→&#8221;行動網路&#8221;→把&#8221;已啟用資料&#8221;的勾勾去掉吧！！</p>
 <h3>設定語言</h3>
@@ -992,15 +1145,15 @@
 </ul>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/old/pacman-v22-3-dhd/feed/</wfw:commentRss>
-			<slash:comments>5</slash:comments>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/old/pacman-v22-3-dhd/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>6/5-ArchLinux重大更新紀錄</title>
-		<link>/old/archlinux-update/</link>
-					<comments>/old/archlinux-update/#respond</comments>
+		<link>//blog-legacy.yuaner.tw/old/archlinux-update/</link>
+					<comments>//blog-legacy.yuaner.tw/old/archlinux-update/#respond</comments>
 		
 		<dc:creator><![CDATA[元兒～]]></dc:creator>
 		<pubDate>Wed, 05 Jun 2013 17:02:05 +0000</pubDate>
@@ -1129,37 +1282,7 @@ exit</pre>
 </code></pre>
 ]]></content:encoded>
 					
-					<wfw:commentRss>/old/archlinux-update/feed/</wfw:commentRss>
-			<slash:comments>0</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>Firefox將分頁列移到網址下方</title>
-		<link>/old/firefox%e5%b0%87%e5%88%86%e9%a0%81%e5%88%97%e7%a7%bb%e5%88%b0%e7%b6%b2%e5%9d%80%e4%b8%8b%e6%96%b9/</link>
-					<comments>/old/firefox%e5%b0%87%e5%88%86%e9%a0%81%e5%88%97%e7%a7%bb%e5%88%b0%e7%b6%b2%e5%9d%80%e4%b8%8b%e6%96%b9/#respond</comments>
-		
-		<dc:creator><![CDATA[元兒～]]></dc:creator>
-		<pubDate>Mon, 05 Nov 2012 11:35:00 +0000</pubDate>
-				<category><![CDATA[未整理舊文]]></category>
-		<category><![CDATA[Firefox]]></category>
-		<guid isPermaLink="false">http://blog.yuan817.twbbs.org/2012/11/firefox%e5%b0%87%e5%88%86%e9%a0%81%e5%88%97%e7%a7%bb%e5%88%b0%e7%b6%b2%e5%9d%80%e4%b8%8b%e6%96%b9/</guid>
-
-					<description><![CDATA[自從Firefox第4版開始，分頁列就預設移到網址列上方，我也就慢慢的習慣這種介面了。但可能還是有人不習慣這樣的介面。在之前一段時間裡，是可以設定成要把分頁放在下方，不過這個選項在新版裡已經消失。如果想要調整的話&#8230;&#8230; 操作示範: 在網址列輸入 &#8220;about:config&#8220;進入變更進階設定值→ 然後在&#8221;搜尋&#8220;那邊輸入 &#822&#8230;]]></description>
-										<content:encoded><![CDATA[<p>自從Firefox第4版開始，分頁列就預設移到網址列上方，我也就慢慢的習慣這種介面了。但可能還是有人不習慣這樣的介面。<br /><span>在之前一段時間裡，是可以設定成要把分頁放在下方，不過這個選項在新版裡已經消失</span>。<br />如果想要調整的話&#8230;&#8230;</p>
-<div><a href="http://2.bp.blogspot.com/-LormKngtZlE/UJejlzRkvlI/AAAAAAAADWA/GrQmk5vJOZQ/s1600/%E5%88%86%E9%A0%81%E5%88%97%E5%9C%A8%E4%B8%8B%E6%96%B9+%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2012-11-05+00:18:15+(c).png" imageanchor="1"><img loading="lazy" decoding="async" border="0" height="358" src="http://2.bp.blogspot.com/-LormKngtZlE/UJejlzRkvlI/AAAAAAAADWA/GrQmk5vJOZQ/s640/%E5%88%86%E9%A0%81%E5%88%97%E5%9C%A8%E4%B8%8B%E6%96%B9+%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2012-11-05+00:18:15+(c).png" width="640"></a></div>
-<p></p>
-<h3>操作示範: </h3>
-<p>在網址列輸入 &#8220;<span><b>about:config</b></span>&#8220;進入變更進階設定值<br />→ 然後在&#8221;<span>搜尋</span>&#8220;那邊輸入 &#8220;<span><b>browser.tabs.onTop</b></span>&#8221; → 然後在這個選項上直接用滑鼠點兩下調整成&#8221;<b><span>false</span></b>&#8220;，這樣馬上就能看到效果囉～</p>
-<div><a href="http://3.bp.blogspot.com/-ogtb0awLE18/UJekAuAGNnI/AAAAAAAADWI/ysu0SFmmGBo/s1600/%E5%88%86%E9%A0%81%E5%88%97%E5%9C%A8%E4%B8%8A%E6%96%B9+%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2012-11-05+19:31:41.png" imageanchor="1"><img loading="lazy" decoding="async" border="0" height="358" src="http://3.bp.blogspot.com/-ogtb0awLE18/UJekAuAGNnI/AAAAAAAADWI/ysu0SFmmGBo/s640/%E5%88%86%E9%A0%81%E5%88%97%E5%9C%A8%E4%B8%8A%E6%96%B9+%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96%E5%AD%98%E7%82%BA+2012-11-05+19:31:41.png" width="640"></a></div>
-<p></p>
-<h3>參考資料: </h3>
-<ul>
-<li><span dir="ltr"><a href="http://forum.moztw.org/viewtopic.php?f=2&#038;t=36027&#038;sid=f1a309228ff1dcce08f3d624f9ffe2ba" target="_blank">如何將分頁工具列移至瀏覽工具列的下方？</a></span></li>
-</ul>
-]]></content:encoded>
-					
-					<wfw:commentRss>/old/firefox%e5%b0%87%e5%88%86%e9%a0%81%e5%88%97%e7%a7%bb%e5%88%b0%e7%b6%b2%e5%9d%80%e4%b8%8b%e6%96%b9/feed/</wfw:commentRss>
+					<wfw:commentRss>//blog-legacy.yuaner.tw/old/archlinux-update/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		

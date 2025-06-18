@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>cloudflare &#8211; 元兒～ 技術筆記（舊站）</title>
+	<atom:link href="//blog-legacy.yuaner.tw/tag/cloudflare/feed/" rel="self" type="application/rss+xml" />
+	<link>//blog-legacy.yuaner.tw/</link>
+	<description>本站不再維護更新，新內容請移駕去新站</description>
+	<lastBuildDate>Wed, 18 Jun 2025 16:45:31 +0000</lastBuildDate>
+	<language>zh-TW</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.1</generator>
+
+<image>
+	<url>//blog-legacy.yuaner.tw/wp-content/uploads/2022/09/pc-programming-icon-150x150.png</url>
+	<title>cloudflare &#8211; 元兒～ 技術筆記（舊站）</title>
+	<link>//blog-legacy.yuaner.tw/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>處理WordPress經過Cloudflare的https對應</title>
+		<link>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/</link>
+					<comments>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/#respond</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2025 16:45:31 +0000</pubDate>
+				<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[資訊技術]]></category>
+		<category><![CDATA[cloudflare]]></category>
+		<category><![CDATA[wordpress]]></category>
+		<guid isPermaLink="false">//blog-legacy.yuaner.tw/?p=886</guid>
+
+					<description><![CDATA[這應該是倒數第二篇了吧，想不到為了裝靜態化要用的Plugin，結果被逼要先升級系統，然後在升級系統的過程中又遇到對外線路有問題，在處理的時候就乾脆來寫經驗心得文做個紀錄。 我這邊的主機線路是：對外網 &#8212; Cloudflare &#8212; Reverse Proxy &#8212; WordPress Cloudflare設定的地方在 Dashboard→「SSL/TLS」→「概觀」&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>這應該是倒數第二篇了吧，想不到為了裝靜態化要用的Plugin，結果被逼要先升級系統，然後在升級系統的過程中又遇到對外線路有問題，在處理的時候就乾脆來寫經驗心得文做個紀錄。</p>
+
+
+
+<p>我這邊的主機線路是：<br>對外網 &#8212; Cloudflare &#8212; Reverse Proxy &#8212; WordPress</p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">Cloudflare設定的地方在</h2>
+
+
+
+<p>Dashboard→「SSL/TLS」→「概觀」→「自訂SSL/TLS」那邊</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="712" height="1024" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png" alt="" class="wp-image-889" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png 712w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-209x300.png 209w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-768x1104.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-1068x1536.png 1068w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account.png 1334w" sizes="(max-width: 712px) 100vw, 712px" /></figure>
+
+
+
+<h2 class="wp-block-heading">一個解法：Cloudflare走flexable模式</h2>
+
+
+
+<p>好處：簡單方便 缺點：是強制主機送https超連結，主機自身自己不知道有https，容易造成線路混亂。</p>
+
+
+
+<p>我的網路線路就是：</p>
+
+
+<figure class="wp-block-table">
+<table class="has-fixed-layout">
+<tbody>
+<tr>
+<td class="has-text-align-center" colspan="2" data-align="center">對外網</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Cloudflare</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Reverse Proxy</td>
+<td class="has-text-align-center" colspan="2" data-align="center">WordPress</td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"> </td>
+<td class="has-text-align-center has-light-green-cyan-background-color has-background" colspan="2" data-align="center">http 443</td>
+<td class="has-text-align-center has-luminous-vivid-amber-background-color has-background" colspan="4" data-align="center">http 80</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+<p>WordPress主機視角: 全程都是http，不知道自己是https</p>
+
+
+
+<p>從Cloudflare到Worepress這段走80純http，但是對外到Cloudflare這邊走https。<br>因為Wordpress自己不知道是走https，所以由Wordpress輸出的所有連結都會是http，必須手動改設定強制都送https超連結。</p>
+
+
+
+<p>改wp-config.php 強制開 HTTPS：</p>
+
+
+
+<pre class="wp-block-code"><code>$_SERVER&#091;&#039;HTTPS&#039;] = &#039;on&#039;;</code></pre>
+
+
+
+<h2 class="wp-block-heading">另一個解法：Cloudflare走full模式（我最後採用的方案 ）</h2>
+
+
+
+<p>缺點：設定麻煩一些 好處：可以讓目標主機知道</p>
+
+
+
+<p>我的網路線路就是：</p>
+
+
+<figure class="wp-block-table">
+<table class="has-fixed-layout">
+<tbody>
+<tr>
+<td class="has-text-align-center" colspan="2" data-align="center">對外網</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Cloudflare</td>
+<td class="has-text-align-center" colspan="2" data-align="center">Reverse Proxy</td>
+<td class="has-text-align-center" colspan="2" data-align="center">WordPress</td>
+</tr>
+<tr>
+<td class="has-text-align-center" data-align="center"> </td>
+<td class="has-text-align-center has-light-green-cyan-background-color has-background" style="text-align: center;" colspan="4" data-align="center">http 443</td>
+<td class="has-text-align-center has-luminous-vivid-amber-background-color has-background" colspan="2" data-align="center">http 80</td>
+<td class="has-text-align-center" data-align="center"> </td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+<p>WordPress主機視角: 雖然傳輸是http，但可以從封包header知道現在是https</p>
+
+
+
+<p>然後Reverse Proxy這層要加入以下內容，讓可以識別是不是https的header能正確傳給Wordpress那邊：</p>
+
+
+
+<pre class="wp-block-code"><code>proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-For $remote_addr;
+proxy_set_header Host $host;</code></pre>
+
+
+
+<p>wp-config.php</p>
+
+
+
+<pre class="wp-block-code"><code>if (isset($_SERVER&#091;&#039;HTTP_X_FORWARDED_PROTO&#039;]) &amp;&amp; $_SERVER&#091;&#039;HTTP_X_FORWARDED_PROTO&#039;] === &#039;https&#039;) {
+    $_SERVER&#091;&#039;HTTPS&#039;] = &#039;on&#039;;
+}</code></pre>
+
+
+
+<p>本來想說這篇寫在新站，不過想想是和Wordpress有關，所以還是先當作這裡Wordpress舊站的倒數兩篇吧～</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
