@@ -428,9 +428,9 @@ body {
 @font-face {
   font-family: 'vs-icons';
   src:
-    url('//blog-legacy.yuaner.tw/wp-content/themes/showme/assets/icons/icons.ttf') format('truetype'),
-    url('//blog-legacy.yuaner.tw/wp-content/themes/showme/assets/icons/icons.woff') format('woff'),
-    url('//blog-legacy.yuaner.tw/wp-content/themes/showme/assets/icons/icons.svg#icons') format('svg');
+    url('/wp-content/themes/showme/assets/icons/icons.ttf') format('truetype'),
+    url('/wp-content/themes/showme/assets/icons/icons.woff') format('woff'),
+    url('/wp-content/themes/showme/assets/icons/icons.svg#icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
