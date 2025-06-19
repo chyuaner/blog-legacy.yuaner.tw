@@ -12,7 +12,7 @@
 	<atom:link href="//blog-legacy.yuaner.tw/tag/hosting-websites/feed/" rel="self" type="application/rss+xml" />
 	<link>//blog-legacy.yuaner.tw/</link>
 	<description>本站不再維護更新，新內容請移駕去新站</description>
-	<lastBuildDate>Wed, 18 Jun 2025 17:49:58 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 19 Jun 2025 00:28:45 +0000</lastBuildDate>
 	<language>zh-TW</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,497 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>WordPress網站靜態化的處理</title>
+		<link>//blog-legacy.yuaner.tw/other/wordpress-to-static/</link>
+					<comments>//blog-legacy.yuaner.tw/other/wordpress-to-static/#respond</comments>
+		
+		<dc:creator><![CDATA[元兒～]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2025 00:28:32 +0000</pubDate>
+				<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[其他]]></category>
+		<category><![CDATA[資訊技術]]></category>
+		<category><![CDATA[wordpress]]></category>
+		<category><![CDATA[架站]]></category>
+		<guid isPermaLink="false">//blog-legacy.yuaner.tw/?p=882</guid>
+
+					<description><![CDATA[這應該是本站（舊站）最後一篇收尾文了。我的新部落格建置完成之後，本站舊站要做靜態化封存處理，之後我會把心力放在部落格新站了。 最根本原因就是，我已經沒有太多心力在維護系統上，加上Wordpress功能太強也相對容易被攻擊。其實我後來每次登入都是累積20+未更新的plugin&#8230;&#8230;，你可以想想我的主機洞有多大&#8230; 再加上我的主機太久沒維護，都不知道累積多少未處理的CV&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>這應該是本站（舊站）最後一篇收尾文了。我的新部落格建置完成之後，本站舊站要做靜態化封存處理，之後我會把心力放在部落格新站了。</p>
+
+
+
+<p>最根本原因就是，我已經沒有太多心力在維護系統上，加上Wordpress功能太強也相對容易被攻擊。其實我後來每次登入都是累積20+未更新的plugin&#8230;&#8230;，你可以想想我的主機洞有多大&#8230; 再加上我的主機太久沒維護，都不知道累積多少未處理的CVE了&#8230;&#8230;</p>
+
+
+
+<p>我現在的考量是，舊部落格內容會全部保留繼續上線。但是要做靜態化處理拔掉後端。 至於舊留言就在做靜態化的時候就一起包進主文裡不再更動，然後外嵌新的留言系統，讓舊文還能繼續保有留言的功能。 靜態化完成之後，後端主機就關閉停用，然後就是整個舊站上線封存不再更動了。</p>
+
+
+
+<h2 class="wp-block-heading">靜態化前的處理：處理現有會綁後端的舊功能</h2>
+
+
+
+<p>停用所有會用到後端有關的功能、Widget小工具。所以我直接把右側sidebar那邊會用到後端的全部都拿掉了。</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="963" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-03-04-小工具-‹-元兒～-技術筆記（舊站）-—-WordPress-1024x963.png" alt="" class="wp-image-892" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-03-04-小工具-‹-元兒～-技術筆記（舊站）-—-WordPress-1024x963.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-03-04-小工具-‹-元兒～-技術筆記（舊站）-—-WordPress-300x282.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-03-04-小工具-‹-元兒～-技術筆記（舊站）-—-WordPress-768x723.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-03-04-小工具-‹-元兒～-技術筆記（舊站）-—-WordPress-1536x1445.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-03-04-小工具-‹-元兒～-技術筆記（舊站）-—-WordPress-2048x1927.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h3 class="wp-block-heading">站內搜尋</h3>
+
+
+
+<p>直接放棄，反正現在的舊文全部都是過時內容，大概也用不到了。真的有需要，借助Google搜尋就好了，反正我會繼續讓舊網址繼續生效。</p>
+
+
+
+<p></p>
+
+
+
+<h3 class="wp-block-heading">規劃靜態化後的留言功能要何去何從？以及難度如何？</h3>
+
+
+
+<p>這個對部落格來說算是極其重要的功能，所以針對這需求，我有想過三種情況</p>
+
+
+
+<h4 class="wp-block-heading">保留所有舊留言，不再開放新留言</h4>
+
+
+
+<p>這是最簡單也是最不需要額外做處理的解法。</p>
+
+
+
+<p>關閉留言功能以後，讓靜態化plugin自然的跟著文章頁面一起打包就行。</p>
+
+
+
+<h4 class="wp-block-heading">保留所有舊留言，外嵌新的留言系統混合使用</h4>
+
+
+
+<p>其實這本來是我打算要採用的方式，已經確定在Wordpress後台的「外觀」→「佈景主題檔案編輯器」，可以直接修改comments.php區塊，把comment_form這段註解停用掉就可以關閉新留言輸入框，也可以用這段來插入外嵌留言服務用的區域。</p>
+
+
+
+<p>變成舊留言是隨著主文內容一起打包，新留言則是以新留言系統外加上去的。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="710" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-04-40-編輯佈景主題-‹-元兒～-技術筆記（舊站）-—-WordPress-1024x710.png" alt="" class="wp-image-893" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-04-40-編輯佈景主題-‹-元兒～-技術筆記（舊站）-—-WordPress-1024x710.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-04-40-編輯佈景主題-‹-元兒～-技術筆記（舊站）-—-WordPress-300x208.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-04-40-編輯佈景主題-‹-元兒～-技術筆記（舊站）-—-WordPress-768x533.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-04-40-編輯佈景主題-‹-元兒～-技術筆記（舊站）-—-WordPress-1536x1065.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-04-40-編輯佈景主題-‹-元兒～-技術筆記（舊站）-—-WordPress-2048x1421.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h4 class="wp-block-heading">將所有舊留言全部轉移到新留言系統</h4>
+
+
+
+<p>這算是最漂亮的解法，舊留言搬到新留言系統以後，全面改用新留言系統（前提是新的留言系統有支援匯入功能）。</p>
+
+
+
+<p>這個方案是我決定用Disqus這家，並且是以Wordpress Plugin形式安裝之後，才發現有匯入舊留言的功能。</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="945" height="1024" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-06-16-Disqus-‹-元兒～-技術筆記（舊站）-—-WordPress-945x1024.png" alt="" class="wp-image-894" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-06-16-Disqus-‹-元兒～-技術筆記（舊站）-—-WordPress-945x1024.png 945w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-06-16-Disqus-‹-元兒～-技術筆記（舊站）-—-WordPress-277x300.png 277w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-06-16-Disqus-‹-元兒～-技術筆記（舊站）-—-WordPress-768x832.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-06-16-Disqus-‹-元兒～-技術筆記（舊站）-—-WordPress-1418x1536.png 1418w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-06-06-16-Disqus-‹-元兒～-技術筆記（舊站）-—-WordPress.png 1804w" sizes="(max-width: 945px) 100vw, 945px" /></figure>
+
+
+
+<h3 class="wp-block-heading">留言系統的選擇考量</h3>
+
+
+
+<h4 class="wp-block-heading">Disqus</h4>
+
+
+
+<p>老牌，雖然這家聽說已經是賣給廣告公司，但是目前看到穩定運行的留言系統除了Github類型以外，就只有這家了（其他的我不太敢用，不知道會不會突然倒閉然後留言資料來不及搬）。&nbsp;</p>
+
+
+
+<p>然後讓我比較意外的是Disqus有匯入舊留言的功能（Wordpress Plugin），所以也不用考慮新舊留言混合方案了，全部移到新的留言系統就好了。</p>
+
+
+
+<h4 class="wp-block-heading">Github類相關（utterances giscus gitalk）</h4>
+
+
+
+<p>其實這三個我有比較過，不過這三家各自的優缺點會再另外寫文詳述，今天這邊只大略說，如果選Github類型的，基本上真的要留言的訪客也需要註冊Github才能留言。因為考量到舊站舊內容不一定全是技術類的，所以在舊站就不挑這類型的。（但是新站確定要用gitcus，理由有空會在新站說）</p>
+
+
+
+<h4 class="wp-block-heading">其他家的留言系統</h4>
+
+
+
+<p>基本上因為不夠老牌，我不太敢用，因為留言資料基本上就是交給最後選定的這家，所以要是突然倒閉來不及把資料搬走就&#8230;。</p>
+
+
+
+<p>也不考慮自架，因為這邊舊站都要封存了，我不會有心力再維護後端了。</p>
+
+
+
+<p></p>
+
+
+
+<h3 class="wp-block-heading">更換留言系統成 Discus</h3>
+
+
+
+<p>基本上安裝官方的Wordpress Plugin就可以了，安裝之後會全面把Wordpress整個留言系統都被替換成Discus，會看不到原先在Wordpress內建留言系統的留言。而且在Wordpress後台也會直接把Wordpress內建留言系統的相關選單直接隱藏。</p>
+
+
+
+<p>但是Discus WordPress Plugin有做舊留匯入功能，基本上可以把所有的舊留言全部搬過去。</p>
+
+
+
+<p></p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">將本站靜態化 &#8211; 使用 Staatic Plugin</h2>
+
+
+
+<p>目前找到最能用的Wordpress Plugin 就是Staatic這家了，主要是這家的免費版就足夠使用，會把完整頁面包含舊留言都會一起打包進來。</p>
+
+
+
+<ul class="wp-block-list">
+<li>Staatic <a href="https://wordpress.org/plugins/staatic">https://wordpress.org/plugins/staatic</a></li>
+</ul>
+
+
+
+<p>這家Plugin的原理其實就是一整個爬蟲，會正常瀏覽你的全站所有頁面，把所有頁面都打包進來。所以前提就是要確定你的網站是公開上線的，而且URL Rewrite是正常運作的。</p>
+
+
+
+<p>先前也有考慮過其他家的plugin</p>
+
+
+
+<ul class="wp-block-list">
+<li>Simply Static: 免費版好像不能把Wordpress系統的舊留言一起靜態化打包進來，所以我當初為了這需求而不用這家。不過後來才發現我最後選用的Disqus留言系統可以直接匯入所有舊留言，所以其實就沒有不能包含Wordpress留言系統舊留言問題了。</li>
+
+
+
+<li>WP2Static: 很多教學文主推，不過這個已經死掉了，我嘗試下載zip庫存版本硬裝，Wordpress系統還不給裝。</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">設定404頁面</h3>
+
+
+
+<p>對應到設定選項：Staatic Settings→Advanced→Page Not Found Path</p>
+
+
+
+<p>這邊我有手動修改404輸出檔案要輸出成 <code>404.html</code> 來用，這樣就可以和Github Pages自訂404頁面的方法對應上了。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="1012" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-18-at-23-11-13-Staatic-Settings-‹-元兒～-技術筆記-—-WordPress-1024x1012.png" alt="" class="wp-image-896" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-18-at-23-11-13-Staatic-Settings-‹-元兒～-技術筆記-—-WordPress-1024x1012.png 1024w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-18-at-23-11-13-Staatic-Settings-‹-元兒～-技術筆記-—-WordPress-300x296.png 300w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-18-at-23-11-13-Staatic-Settings-‹-元兒～-技術筆記-—-WordPress-768x759.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-18-at-23-11-13-Staatic-Settings-‹-元兒～-技術筆記-—-WordPress-1536x1518.png 1536w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-18-at-23-11-13-Staatic-Settings-‹-元兒～-技術筆記-—-WordPress-2048x2024.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h3 class="wp-block-heading">Deploy to files</h3>
+
+
+
+<p>對應到設定選項：Staatic Settings→Deployment</p>
+
+
+
+<p>他雖然有Deploy to Github Pages的功能，不過要另外申請API Key看起來很麻煩。我只想簡單了事。所以選擇「Deploy static site to Local Directory」到檔案資料夾之後，我再手動ssh進主機，手動git push上去。反正我這個舊站現在的目的就是封存，之後不會再頻繁更動了，所以想說這部份簡單做就好。</p>
+
+
+
+<p>不過如果你的目的只是為了靜態化加速，沒有要封存的話，還是建議設Deploy to Github，之後在編修文章時能自動處理會方便很多。</p>
+
+
+
+<h3 class="wp-block-heading">略過特定檔案</h3>
+
+
+
+<p>對應到設定選項：Staatic Settings→Deployment→Retain Files/Directories</p>
+
+
+
+<p>他預設Deploy時會自動清空該資料夾的所有檔案，但是因為我要搭配git和Github設定的Domain Name，所以要把這兩份檔案資料夾略過</p>
+
+
+
+<ul class="wp-block-list">
+<li>git</li>
+
+
+
+<li>CNAME</li>
+</ul>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">靜態化後的踩坑：Discus + WordPress 整個靜態化之後功能失效</h2>
+
+
+
+<p>因為靜態化後的網址會不同，原先我用Wordpress plugin形式安裝的Discus好像還是會和後端的東西有關連到，一旦轉到靜態站之後，外嵌留言就會壞掉。會在網頁實際出現「我們無法載入 Disqus。如果您是管理者請見我們的除錯指南。」</p>
+
+
+
+<p>我是開檢查元素之後才發現Wordpress後端站與靜態站送給Discus的Request是不一樣的，這樣比對之後才知道需要手動額外設定。</p>
+
+
+
+<figure class="wp-block-table is-style-stripes"><table class="has-fixed-layout"><tbody><tr><td>WordPress原站送的request</td><td>靜態站送的request</td></tr><tr><td>https://disqus.com/embed/comments/?base=default&amp;f=yuaner-wpblog&amp;t_i=752 https://blog.yuaner.tw/?p=752&amp;<strong>t_u=//blog-legacy.yuaner.tw/tech/twdomaintrans/</strong>&amp;t_e=給tw域名換一家域名商吧&amp;t_d=給tw域名換一家域名商吧 – 元兒～ 技術筆記&amp;t_t=給tw域名換一家域名商吧&amp;s_o=default</td><td>https://disqus.com/embed/comments/?base=default&amp;f=yuaner-wpblog&amp;t_i=752 https://blog.yuaner.tw/?p=752&amp;<strong>t_u=/tech/twdomaintrans/</strong>&amp;t_e=給tw域名換一家域名商吧&amp;t_d=給tw域名換一家域名商吧 – 元兒～ 技術筆記&amp;t_t=給tw域名換一家域名商吧&amp;s_o=default</td></tr></tbody></table></figure>
+
+
+
+<p>所以我直接去Wordpress後台：「外觀」→「佈景主題檔案編輯器」，直接對 <strong>single.php</strong> 單篇文章模板直接插入控制disqus_config參數的JS，具體步驟如下：</p>
+
+
+
+<p>建立<strong>assets/js/disqus-config.js</strong> 檔案</p>
+
+
+
+<pre class="wp-block-code"><code>function loadDisqusConfig(pageUrl, pageId) {
+  window.disqus_config = function () {
+    this.page.url = pageUrl;
+    this.page.identifier = pageId;
+  };
+}
+</code></pre>
+
+
+
+<p>設定<strong>inc/assets.php</strong></p>
+
+
+
+<pre class="wp-block-code"><code>    // Disqus
+    wp_register_script( &#039;disqus&#039;, get_template_directory_uri() . &#039;/assets/js/disqus-config.js&#039;, array(), &#039;1.0.0&#039;, true ); // 加入此行
+
+    // Register theme scripts.
+    wp_register_script( &#039;vs-scripts&#039;, get_template_directory_uri() . &#039;/assets/js/theme.js&#039;, array(
+      &#039;jquery&#039;,
+      &#039;object-fit-images&#039;,
+	  &#039;disqus&#039;, // 加入此行
+    ), $version, true );
+</code></pre>
+
+
+
+<p>在<strong>single.php</strong>單篇文章那邊加入</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;script src=&quot;/wp-content/themes/showme/assets/js/disqus-config.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  const protocol = &quot;https:&quot;;
+  const slashes = &quot;//&quot;;
+  const domain = &quot;blog-legacy.yuaner.tw&quot;;
+  const path = &quot;&lt;?php echo esc_js(parse_url(get_permalink(), PHP_URL_PATH)); ?&gt;&quot;;
+  const pageUrl = protocol + slashes + domain + path;
+
+  const pageId = &quot;&lt;?php echo esc_js(get_the_ID()); ?&gt;&quot;;
+
+  loadDisqusConfig(pageUrl, pageId);
+&lt;/script&gt;</code></pre>
+
+
+
+<p>你可能會問為什麼single.php呼叫的這段要故意拆字給JS處理呢～？因為實測發現，即使是直接把網址寫死，但Staatic在render產生靜態頁檔案的時候，還是會主動強行把我寫死的網址改掉，導致Discus留言功能還是壞掉的。所以我後來對策是拆字，然後由JS前端來拼湊組合出完整的網址字串，來避開後端產出靜態內容後被Staatic強改的困擾。</p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">靜態化後的Duscus文章留言初始化</h2>
+
+
+
+<p>五年內的留言可以用同步的方式讓Discus對該篇文章初始化</p>
+
+
+
+<p>過久的就只能手動在Wordpress站一個個正常開啟文章，讓Discus對該篇文章初始化後，才能開始留言。（本來想說要寫自動點開文章的爬蟲腳本，不過後來我還是人肉手動一個個點也比寫腳本省事，就這樣處理完了）</p>
+
+
+
+<p></p>
+
+
+
+<h2 class="wp-block-heading">Staatic成功產生出靜態化網站資料夾後</h2>
+
+
+
+<h3 class="wp-block-heading">簡單開個測試用小站（以apache2為例）</h3>
+
+
+
+<p>/etc/apache2/ports.conf</p>
+
+
+
+<pre class="wp-block-code"><code>Listen 81 # 新增一個要啟用的Port</code></pre>
+
+
+
+<p>/etc/apache2/sites-available/wordpress-static.conf</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;VirtualHost *:81&gt;
+        DocumentRoot /var/www/html/wordpress-static
+&lt;/VirtualHost&gt;
+</code></pre>
+
+
+
+<p>然後做 a2ensite wordpress-static 和記得重啟 systemctl reload apache2</p>
+
+
+
+<h3 class="wp-block-heading">上傳到Github Pages上架</h3>
+
+
+
+<p>打包完成之後，我是直接 cd 到已產出靜態包資料夾，然後手動當場做 git init 、git add &#8211;all 、 git commit -m &#8216;init&#8217; 。後續有更新的話，就是靜態產完之後，在add和commit和push處理。</p>
+
+
+
+<h2 class="wp-block-heading">網址規劃調整</h2>
+
+
+
+<ul class="wp-block-list">
+<li>blog.yuaner.tw （常駐開放）
+<ul class="wp-block-list">
+<li>目前暫時設301導轉，以網址右邊字串結構原封不動，暫時一律導轉到blog-legacy.yuaner.tw</li>
+
+
+
+<li>之後新部落格正式上架，就會改掛這個網址了</li>
+
+
+
+<li>有在考慮透過CDN層設定舊網址導向到舊站用網址，不過之後有心力再弄吧～</li>
+</ul>
+</li>
+
+
+
+<li>blog-legacy.yuaner.tw （常駐開放）
+<ul class="wp-block-list">
+<li>現在這個舊部落格就轉移到這個網址封存了。</li>
+
+
+
+<li>一開始是先把整個這個Wordpress系統掛上這網址。現在做完靜態化處理之後，已經將這個網址改掛靜態化後的主機（其實就是Github Pages），之後這個就當作我以前的歷史回憶吧～</li>
+</ul>
+</li>
+
+
+
+<li>xxxadmin.yuaner.tw （我自己內部用）
+<ul class="wp-block-list">
+<li>舊站靜態化之後搬去靜態網頁空間主機，把blog-legacy.yuaner.tw網址取代掉了。而原始的Wordpress系統站就另外開設這個網址掛上來。後續就只有這邊能登入Wordpress管理後台。</li>
+
+
+
+<li>靜態化完成之後，Wordpress這個主機就會關閉停掉。如果偶爾要回來處理舊站的話，就會把這個主機開回來，然後處理完重新產生出新的靜態化版本上架之後就會關閉這台主機。</li>
+</ul>
+</li>
+
+
+
+<li>xxxadmin.yuaner.tw:81 （我自己內部用）
+<ul class="wp-block-list">
+<li>同Wordpress主機，只是產完靜態化網站包之後，在上傳Github Pages=之前，還有地方可以測適用。</li>
+</ul>
+</li>
+
+
+
+<li>blog-stage.yuaner.tw （測試中）
+<ul class="wp-block-list">
+<li>新站測試中，敬請期待！之後會移除這個網址，然後正式掛到blog.yuaner.tw主站去！！</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">其實我本來還有考慮把這個舊站搬遷至wordpress.com</h2>
+
+
+
+<p>想說反正主要目的是為了封存不再維護更動了，然後wordpress.com 線上版架構本來就一樣，而且wordpress.com線上版本來就是會專人維持維護營運就不用我再親自管了。不過後來有發現幾個大問題：</p>
+
+
+
+<ul class="wp-block-list">
+<li>需接受被內容審查
+<ul class="wp-block-list">
+<li>雖然這點所有線上版都一樣，不過我的情況更慘，才剛剛匯入就被平台當垃圾內容自動Ban掉整個帳號。而且免費帳號還不能用即時客服，後來是找到申訴連結以後，寫信申訴才處理好。</li>
+</ul>
+</li>
+
+
+
+<li>theme必須更換成wordpress.com提供的：這點我也還能接受，利用他提供的theme盡量調到接近先前的樣子就行。</li>
+
+
+
+<li>網址域名必須用他準備的xxx.wordpress.com
+<ul class="wp-block-list">
+<li>這點我也還能接受，因為我的目的主要就是封存舊站，我只要把舊網址做301導轉就行。</li>
+</ul>
+</li>
+
+
+
+<li>致命傷：網址結構必須用 <code>/2025/06/sample-post/ </code>這串
+<ul class="wp-block-list">
+<li>這會直接導致和我現在的網址結構：/%category%/%postname%/ 不合，完全無法以轉址規則的方式讓舊網址</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>//blog-legacy.yuaner.tw/other/wordpress-to-static/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>處理WordPress經過Cloudflare的https對應</title>
 		<link>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/</link>
 					<comments>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/#respond</comments>
@@ -64,7 +555,7 @@
 
 
 
-<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="712" height="1024" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png" alt="" class="wp-image-889" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png 712w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-209x300.png 209w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-768x1104.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-1068x1536.png 1068w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account.png 1334w" sizes="(max-width: 712px) 100vw, 712px" /></figure>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="712" height="1024" src="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png" alt="" class="wp-image-889" srcset="//blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-712x1024.png 712w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-209x300.png 209w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-768x1104.png 768w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account-1068x1536.png 1068w, //blog-legacy.yuaner.tw/wp-content/uploads/2025/06/Screenshot-2025-06-19-at-00-40-48-Cloudflare-Dashboard-Manage-Your-Account.png 1334w" sizes="auto, (max-width: 712px) 100vw, 712px" /></figure>
 
 
 
@@ -175,6 +666,16 @@ proxy_set_header Host $host;</code></pre>
 
 
 <p></p>
+
+
+
+<h2 class="wp-block-heading">參考資料</h2>
+
+
+
+<ul class="wp-block-list">
+<li><a href="https://medium.com/@tyh409700530/nginx-reverse-proxy-wordpress-in-https-mode-a21658f23978">https://medium.com/@tyh409700530/nginx-reverse-proxy-wordpress-in-https-mode-a21658f23978</a></li>
+</ul>
 ]]></content:encoded>
 					
 					<wfw:commentRss>//blog-legacy.yuaner.tw/tech/cloudflare-worepress-https/feed/</wfw:commentRss>
@@ -198,9 +699,9 @@ proxy_set_header Host $host;</code></pre>
 					<description><![CDATA[我是在自己電腦上Linux Ubuntu 12.04架資料庫的 主要是從套件庫裝了mysql-server、phpmyadmin、apache2.2-bin套件（其餘相依性的套件會自動安裝）重開機以後打開瀏覽器，網址那邊輸入&#8221;http://localhost&#8220;，如果有出現&#8221;It works!&#8221;字樣的話就表示網頁伺服器有架成功。如果要進入網頁版MySQ&#8230;]]></description>
 										<content:encoded><![CDATA[<p><span><span align="right"><span>我是在自己電腦上Linux Ubuntu 12.04架資料庫的</p>
 <p>主要是從套件庫裝了<span>mysql-server</span>、<span>phpmyadmin</span>、<span>apache2.2-bin</span>套件（其餘相依性的套件會自動安裝）<br />重開機以後打開瀏覽器，網址那邊輸入&#8221;<span>http://localhost</span>&#8220;，如果有出現&#8221;It works!&#8221;字樣的話就表示網頁伺服器有架成功。<br />如果要進入網頁版MySQL管理介面的話，可以在網址那邊輸入&#8221;<span>http://localhost/phpmyadmin</span>&#8220;</span></span></span></p>
-<div><a href="http://1.bp.blogspot.com/-tk2prR8hwSU/UCFPJlZAkWI/AAAAAAAACdc/-8eczQk1mlE/s1600/phpmyadmin+2012-08-08+01:22:53.png" imageanchor="1"><img decoding="async" border="0" height="358" src="http://1.bp.blogspot.com/-tk2prR8hwSU/UCFPJlZAkWI/AAAAAAAACdc/-8eczQk1mlE/s640/phpmyadmin+2012-08-08+01:22:53.png" width="640"></a></div>
+<div><a href="http://1.bp.blogspot.com/-tk2prR8hwSU/UCFPJlZAkWI/AAAAAAAACdc/-8eczQk1mlE/s1600/phpmyadmin+2012-08-08+01:22:53.png" imageanchor="1"><img loading="lazy" decoding="async" border="0" height="358" src="http://1.bp.blogspot.com/-tk2prR8hwSU/UCFPJlZAkWI/AAAAAAAACdc/-8eczQk1mlE/s640/phpmyadmin+2012-08-08+01:22:53.png" width="640"></a></div>
 <p><span><span align="right"><span><br /></span></span></span><br /><span><span align="right"><span></span></span></span><br /><span><span align="right"><span></span></span></span><br /><span><span align="right"><span><br />至於如果想要安裝MySQL管理的圖形視窗介面的話，最簡單（又偷懶）的裝法就是直接去&#8221;Ubuntu 軟體中心&#8221;用&#8221;mysql&#8221;關鍵字去搜尋，就能找到了</span></span></span></p>
-<div><a href="http://4.bp.blogspot.com/-nmOZjyf3w9M/UCFMiObb_AI/AAAAAAAACdQ/fGrXqeiekko/s1600/Ubuntu+%E8%BB%9F%E9%AB%94%E4%B8%AD%E5%BF%83+%E6%90%9C%E5%B0%8Bmysql.png" imageanchor="1"><img decoding="async" border="0" height="430" src="http://4.bp.blogspot.com/-nmOZjyf3w9M/UCFMiObb_AI/AAAAAAAACdQ/fGrXqeiekko/s640/Ubuntu+%E8%BB%9F%E9%AB%94%E4%B8%AD%E5%BF%83+%E6%90%9C%E5%B0%8Bmysql.png" width="640"></a></div>
+<div><a href="http://4.bp.blogspot.com/-nmOZjyf3w9M/UCFMiObb_AI/AAAAAAAACdQ/fGrXqeiekko/s1600/Ubuntu+%E8%BB%9F%E9%AB%94%E4%B8%AD%E5%BF%83+%E6%90%9C%E5%B0%8Bmysql.png" imageanchor="1"><img loading="lazy" decoding="async" border="0" height="430" src="http://4.bp.blogspot.com/-nmOZjyf3w9M/UCFMiObb_AI/AAAAAAAACdQ/fGrXqeiekko/s640/Ubuntu+%E8%BB%9F%E9%AB%94%E4%B8%AD%E5%BF%83+%E6%90%9C%E5%B0%8Bmysql.png" width="640"></a></div>
 <p><span><span align="right"><span><br />或是直接安裝<span>mysql-admin</span>、<span>mysql-query-browser</span>這兩個套件</span></span></span></p>
 <div><a href="http://4.bp.blogspot.com/-EDpaapxUhAw/UCFMCn75ceI/AAAAAAAACdA/F9Lp24HttFA/s1600/MySQL+Query+Browser.png" imageanchor="1"><img loading="lazy" decoding="async" border="0" height="504" src="http://4.bp.blogspot.com/-EDpaapxUhAw/UCFMCn75ceI/AAAAAAAACdA/F9Lp24HttFA/s640/MySQL+Query+Browser.png" width="640"></a></div>
 <div><a href="http://2.bp.blogspot.com/-_oOQ4-QL6Fk/UCFL5NKJijI/AAAAAAAACc4/ZESm_nIEUfE/s1600/MySQL+Administrator.png" imageanchor="1"><img loading="lazy" decoding="async" border="0" height="403" src="http://2.bp.blogspot.com/-_oOQ4-QL6Fk/UCFL5NKJijI/AAAAAAAACc4/ZESm_nIEUfE/s640/MySQL+Administrator.png" width="640"></a></div>
