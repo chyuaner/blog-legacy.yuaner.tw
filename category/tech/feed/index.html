@@ -12,7 +12,7 @@
 	<atom:link href="/category/tech/feed/" rel="self" type="application/rss+xml" />
 	<link>/</link>
 	<description>本站不再維護更新，新內容請移駕去新站</description>
-	<lastBuildDate>Thu, 19 Jun 2025 00:53:14 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 19 Jun 2025 03:50:12 +0000</lastBuildDate>
 	<language>zh-TW</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -342,15 +342,15 @@
 
 <pre class="wp-block-code"><code>&lt;script src=&quot;/wp-content/themes/showme/assets/js/disqus-config.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
+  // 避免靜態化工具對 this.page.url 產生破壞，改為 JS 拼接
   const protocol = &quot;https:&quot;;
   const slashes = &quot;//&quot;;
   const domain = &quot;blog-legacy.yuaner.tw&quot;;
   const path = &quot;&lt;?php echo esc_js(parse_url(get_permalink(), PHP_URL_PATH)); ?&gt;&quot;;
   const pageUrl = protocol + slashes + domain + path;
+  const pageIdentifier = &quot;&lt;?php echo get_the_ID(); ?&gt; &lt;?php echo esc_js( $post-&gt;guid ); ?&gt;&quot;;
 
-  const pageId = &quot;&lt;?php echo esc_js(get_the_ID()); ?&gt;&quot;;
-
-  loadDisqusConfig(pageUrl, pageId);
+  loadDisqusConfig(pageUrl, pageIdentifier);
 &lt;/script&gt;</code></pre>
 
 

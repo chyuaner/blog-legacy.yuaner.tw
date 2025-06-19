@@ -512,15 +512,15 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 
 <pre class="wp-block-code"><code>&lt;script src="/wp-content/themes/showme/assets/js/disqus-config.js"&gt;&lt;/script&gt;
 &lt;script&gt;
+  // &#36991;&#20813;&#38748;&#24907;&#21270;&#24037;&#20855;&#23565; this.page.url &#29986;&#29983;&#30772;&#22750;&#65292;&#25913;&#28858; JS &#25340;&#25509;
   const protocol = "https:";
   const slashes = "//";
   const domain = "blog-legacy.yuaner.tw";
   const path = "&lt;?php echo esc_js(parse_url(get_permalink(), PHP_URL_PATH)); ?&gt;";
   const pageUrl = protocol + slashes + domain + path;
+  const pageIdentifier = "&lt;?php echo get_the_ID(); ?&gt; &lt;?php echo esc_js( $post-&gt;guid ); ?&gt;";
 
-  const pageId = "&lt;?php echo esc_js(get_the_ID()); ?&gt;";
-
-  loadDisqusConfig(pageUrl, pageId);
+  loadDisqusConfig(pageUrl, pageIdentifier);
 &lt;/script&gt;</code></pre>
 
 
