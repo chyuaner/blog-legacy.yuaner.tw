@@ -11,8 +11,8 @@
 	<title>元兒～ &#8211; 元兒～ 技術筆記（舊站）</title>
 	<atom:link href="/author/yuan/feed/" rel="self" type="application/rss+xml" />
 	<link>/</link>
-	<description>本站不再維護更新，新內容請移駕去新站</description>
-	<lastBuildDate>Thu, 19 Jun 2025 03:50:12 +0000</lastBuildDate>
+	<description>本站不再維護更新了，新內容請移駕去新站</description>
+	<lastBuildDate>Sat, 21 Jun 2025 20:37:59 +0000</lastBuildDate>
 	<language>zh-TW</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -692,7 +692,7 @@ proxy_set_header Host $host;</code></pre>
 		
 			</item>
 		<item>
-		<title>部落格系統準備遷移</title>
+		<title>部落格系統遷移</title>
 		<link>/other/move-to-new-blog-system/</link>
 					<comments>/other/move-to-new-blog-system/#respond</comments>
 		
@@ -701,7 +701,7 @@ proxy_set_header Host $host;</code></pre>
 				<category><![CDATA[其他]]></category>
 		<guid isPermaLink="false">https://blog-legacy.yuaner.tw/?p=871</guid>
 
-					<description><![CDATA[重要資訊！ 所有舊文章連結請更改網址變成 https://blog-legacy.yuaner.tw/ 開頭！！ 之後會架設新的部落格系統，這次所有舊文章不會搬家到新系統去！會另外開設舊系統專用的這個網址，全部都保留在舊系統。 至於原有的主域名，雖然現在暫時會先設置為301自動跳轉狀態，讓舊網址還暫時有效。 不過之後若部落格新系統架設以後，可能需要配合新系統的功能侷限性與保持系統簡潔，可能不會再繼&#8230;]]></description>
+					<description><![CDATA[重要資訊！ 所有舊文章連結請更改網址變成 https://blog-legacy.yuaner.tw/ 開頭！！ 之後會架設新的部落格系統，這次所有舊文章不會搬家到新系統去！會另外開設舊系統專用的這個網址，全部都保留在舊系統。 至於原有的主域名，已經做過 Cloudflare Worker 透過後綴字串名單有條件的導向到新域名 處理，會繼續讓舊網址生效。（不過如果你能更改網址的話當然是最好了） 至&#8230;]]></description>
 										<content:encoded><![CDATA[
 <p class="has-vivid-red-color has-text-color"><strong>重要資訊！</strong></p>
 
@@ -719,11 +719,7 @@ proxy_set_header Host $host;</code></pre>
 
 
 
-<p>至於原有的主域名，雖然現在暫時會先設置為301自動跳轉狀態，讓舊網址還暫時有效。</p>
-
-
-
-<p>不過之後若部落格新系統架設以後，可能需要配合新系統的功能侷限性與保持系統簡潔，可能不會再繼續讓舊文章舊網址生效。</p>
+<p>至於原有的主域名，已經做過 <a href="https://blog.yuaner.tw/2025/06/cloudflare-sharedurl-oldurl2newurl/" target="_blank" rel="noreferrer noopener">Cloudflare Worker 透過後綴字串名單有條件的導向到新域名</a> 處理，會繼續讓舊網址生效。（不過如果你能更改網址的話當然是最好了）</p>
 
 
 
@@ -747,7 +743,11 @@ proxy_set_header Host $host;</code></pre>
 
 
 
-<p>新系統要用哪套還在評估中，之後心得經驗會直接在新系統上發表，就醬。</p>
+<p>新系統已經確定要用hexo，之後心得經驗會直接在新系統上發表，就醬。</p>
+
+
+
+<p></p>
 ]]></content:encoded>
 					
 					<wfw:commentRss>/other/move-to-new-blog-system/feed/</wfw:commentRss>

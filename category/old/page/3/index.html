@@ -131,7 +131,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 <div class="offcanvas">
   <aside class="offcanvas-sidebar">
     <div class="offcanvas-inner widget-area">
-      <div class="widget widget_nav_menu"><div class="menu-%e5%88%86%e9%a1%9e-container"><ul id="menu-%e5%88%86%e9%a1%9e" class="menu"><li id="menu-item-883" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-883"><a href="https://blog-stage.yuaner.tw">&#37096;&#33853;&#26684;&#26032;&#31449;&#65288;&#28204;&#35430;&#20013;&#65289;</a></li>
+      <div class="widget widget_nav_menu"><div class="menu-%e5%88%86%e9%a1%9e-container"><ul id="menu-%e5%88%86%e9%a1%9e" class="menu"><li id="menu-item-883" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-883"><a href="https://blog.yuaner.tw">&#21069;&#24448; &#37096;&#33853;&#26684;&#26032;&#31449;</a></li>
 </ul></div></div>    </div>
   </aside>
 </div>
@@ -149,12 +149,12 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
                     <div class="site-branding-title">
           <h1 class="site-title"><a href="/" rel="home">&#20803;&#20818;&#65374; &#25216;&#34899;&#31558;&#35352;&#65288;&#33290;&#31449;&#65289;</a></h1>
 
-                      <p class="site-description">&#26412;&#31449;&#19981;&#20877;&#32173;&#35703;&#26356;&#26032;&#65292;&#26032;&#20839;&#23481;&#35531;&#31227;&#39381;&#21435;&#26032;&#31449;</p>
+                      <p class="site-description">&#26412;&#31449;&#19981;&#20877;&#32173;&#35703;&#26356;&#26032;&#20102;&#65292;&#26032;&#20839;&#23481;&#35531;&#31227;&#39381;&#21435;&#26032;&#31449;</p>
                   </div>
           </div>
             </div>
         <div class="navbar-col">
-          <ul id="menu-%e5%88%86%e9%a1%9e-1" class="navbar-nav"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-883"><a href="https://blog-stage.yuaner.tw">&#37096;&#33853;&#26684;&#26032;&#31449;&#65288;&#28204;&#35430;&#20013;&#65289;</a></li>
+          <ul id="menu-%e5%88%86%e9%a1%9e-1" class="navbar-nav"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-883"><a href="https://blog.yuaner.tw">&#21069;&#24448; &#37096;&#33853;&#26684;&#26032;&#31449;</a></li>
 </ul>    <a class="navbar-toggle-offcanvas toggle-offcanvas" href="javascript:void(0)">
       <i class="vs-icon vs-icon-bars"></i>
     </a>
@@ -621,28 +621,33 @@ PS.&#25105;&#24050;&#32147;&#25226;&#25105;&#20043;&#21069;&#19979;&#36617;&#210
 
 
       <aside id="secondary" class="widget-area sidebar-area">
-  
-		<section id="recent-posts-2" class="widget widget_recent_entries">
-		<h2 class="widget-title">&#36817;&#26399;&#25991;&#31456;</h2>
-		<ul>
-											<li>
-					<a href="/other/wordpress-to-static/">WordPress&#32178;&#31449;&#38748;&#24907;&#21270;&#30340;&#34389;&#29702;</a>
-									</li>
-											<li>
-					<a href="/tech/cloudflare-worepress-https/">&#34389;&#29702;WordPress&#32147;&#36942;Cloudflare&#30340;https&#23565;&#25033;</a>
-									</li>
-											<li>
-					<a href="/other/move-to-new-blog-system/">&#37096;&#33853;&#26684;&#31995;&#32113;&#28310;&#20633;&#36983;&#31227;</a>
-									</li>
-											<li>
-					<a href="/life/taobao-refund/">&#28120;&#23542;&#36864;&#27454;&#33287;&#24460;&#32396;&#35201;&#24590;&#40636;&#38936;&#21040;&#36889;&#20123;&#37666;</a>
-									</li>
-											<li>
-					<a href="/other/ipad-repair-exp/">iPad&#26356;&#25563;&#38651;&#27744;&#36865;&#20462;&#32147;&#39511;</a>
-									</li>
-					</ul>
+  <section id="block-5" class="widget widget_block">
+<div class="wp-block-group widget_recent_entries"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained"><h2 class="widget-title">&#26368;&#26032;&#25991;&#31456;&#65288;&#26032;&#31449;&#65289;</h2><div class="wp-widget-group__inner-blocks">
+<div id="hexo-latest-posts">
+  <ul><li><a href="https://blog.yuaner.tw" target="_blank">&#37096;&#33853;&#26684;&#26032;&#31449;&#30340;&#26368;&#26032;&#25991;&#31456;&#36617;&#20837;&#20013;...</a></li></ul>
+</div>
 
-		</section><section id="archives-2" class="widget widget_archive"><h2 class="widget-title">&#24409;&#25972;</h2>
+<script>
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://blog.yuaner.tw/atom.xml")
+  .then(response => response.json())
+  .then(data => {
+    const container = document.querySelector('#hexo-latest-posts ul');
+    container.innerHTML = '';
+    data.items.slice(0, 5).forEach(item => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
+      container.appendChild(li);
+    });
+  });
+</script>
+</div></div></div>
+</section><section id="block-6" class="widget widget_block"><h2 class="widget-title">&#26412;&#31449;&#65288;&#33290;&#31449;&#65289;&#19981;&#20877;&#26356;&#26032;</h2><div class="wp-widget-group__inner-blocks">
+<p>&#26412;&#31449;&#28858;Wordpress&#26550;&#35373;&#24314;&#32622;&#65292;&#36817;&#26399;&#24050;&#20570;&#38748;&#24907;&#21270;&#34389;&#29702;&#65292;&#20006;&#36983;&#31227;&#21040;&#38748;&#24907;&#20027;&#27231;&#12290;</p>
+
+<p>&#26412;&#31449;&#25991;&#31456;&#26159;&#24478;<br>MSN Spaces &rarr; Blogger &rarr; Wordpress &#26178;&#26399;&#19968;&#36335;&#36942;&#20358;&#30340;&#12290;&#22240;&#28858;&#25105;&#36817;&#26399;&#30340;&#23531;&#20316;&#39080;&#26684;&#24050;&#26377;&#19981;&#23569;&#35722;&#21270;&#65292;&#25152;&#20197;&#19981;&#20877;&#25226;&#25152;&#26377;&#33290;&#25991;&#31456;&#25644;&#36983;&#21040;&#26032;&#31449;&#20102;&#65292;&#26412;&#31449;&#23601;&#30070;&#20316;&#25152;&#26377;&#33290;&#25991;&#31456;&#30340;&#23384;&#25918;&#34389;&#12290;</p>
+
+<p>&#30041;&#35328;&#31995;&#32113;&#30001;Disqus&#26367;&#20195;&#65292;&#22240;&#28858;&#38748;&#24907;&#21270;&#24460;&#28961;&#24460;&#31471;&#21151;&#33021;&#65292;&#28961;&#27861;&#20351;&#29992;Wordpress&#20839;&#24314;&#30340;&#30041;&#35328;&#31995;&#32113;&#65292;&#25152;&#20197;&#21478;&#22806;&#23884;&#20837;&#20006;&#23559;&#25152;&#26377;&#33290;&#30041;&#35328;&#36681;&#31227;&#12290;</p>
+</div></section><section id="archives-2" class="widget widget_archive"><h2 class="widget-title">&#24409;&#25972;</h2>
 			<ul>
 					<li><a href="/2025/06/">2025 &#24180; 6 &#26376;</a></li>
 	<li><a href="/2022/09/">2022 &#24180; 9 &#26376;</a></li>
